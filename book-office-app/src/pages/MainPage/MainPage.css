@@ -1,0 +1,37 @@
+.intro {
+    min-height: 100vh;
+    margin: auto;
+    max-width: 800px;
+    text-align: center;
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+    padding-top: 50px;
+}
+.intro h1 {
+    margin-inline: 30px;
+}
+.intro .text {
+    text-align: left;
+    padding-inline: 70px;
+    display: flex;
+}
+@media (min-width: 1200px) {
+}
+@media (max-width: 1200px) {
+}
+@media (max-width: 992px) {
+    .intro {
+        width: 70%;
+    }
+}
+@media (max-width: 768px) {
+    .intro {
+        width: 80%;
+    }
+}
+@media (max-width: 576px) {
+    .intro {
+        width: 90%;
+    }
+}

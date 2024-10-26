@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.service-card-container{
+    border: 1px solid black;
+    border-radius: 20px;
+} 
+
+.service-card-img{
+    border-radius: 10px; 
+}
+
+.text-black{
+    color: black;
+}
+
+.status-btn:hover{
+    background-color: #858dc7 !important;
+}

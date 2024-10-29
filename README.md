@@ -1,1 +1,1 @@
-# book-office-web-app-frontend
+# Книжное издательство (фронтенд)

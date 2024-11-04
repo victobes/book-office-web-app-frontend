@@ -1,12 +1,14 @@
 .intro {
-    min-height: 100vh;
-    margin: auto;
-    max-width: 800px;
-    text-align: center;
+    /* min-height: 100vh; */
+    /* margin: auto; */
+    /* max-width: 800px; */
+    text-align: left;
     display: flex;
-    gap: 40px;
+    gap: 20px;
     flex-direction: column;
-    padding-top: 50px;
+    padding-top: 60px;
+    padding-right: 60%;
+    color: black;
 }
 .intro h1 {
     margin-inline: 30px;
@@ -16,6 +18,20 @@
     padding-inline: 70px;
     display: flex;
 }
+
+.bg{
+    background-image: url('/Users/victoria/book-office-app/src/images/background-image2.jpg');
+    background-size: cover; 
+    background-position: center; 
+    height: 75vh;
+}
+
+.img-card{
+    height: 200px;
+    width: 200px;
+    margin: auto;
+}
+
 @media (min-width: 1200px) {
 }
 @media (max-width: 1200px) {

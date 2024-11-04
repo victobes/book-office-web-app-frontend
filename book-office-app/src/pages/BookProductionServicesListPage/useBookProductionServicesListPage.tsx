@@ -9,7 +9,7 @@ export const useBookProductionServicesListPage = () => {
     const [bookProductionServicesList, setBookProductionServicesList] = useState<IBookProductionService[]>([]);
     const [searchBookProductionServiceTitle, setBookProductionServiceTitle] = useState("");
     
-    const [bookPublishingProjectId, setBookPublishingProjectId] = useState<number>();
+    // const [bookPublishingProjectId, setBookPublishingProjectId] = useState<number>();
     const [selectedServicesCount, setSelectedServicesCount] = useState<number>(0);
 
     const handleSearchServiceClick = () => {
@@ -52,7 +52,7 @@ export const useBookProductionServicesListPage = () => {
 
     return {
         bookProductionServicesList,
-        bookPublishingProjectId,
+        // bookPublishingProjectId,
         selectedServicesCount,
         handleSearchServiceClick,
         handleSearchServiceTitleChange,

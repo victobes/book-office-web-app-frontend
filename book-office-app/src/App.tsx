@@ -7,7 +7,7 @@ function App() {
   const globalProps = useGlobalProps();
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/book-office-web-app-frontend'>
       <AppRoutes {...globalProps} />
     </BrowserRouter>
   )

@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/book-office-web-app-frontend/sw.js', { scope: '/book-office-web-app-frontend/' })})}

@@ -5,6 +5,10 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+.content-wrapper{
+    padding-top: 60px;
+}
+
 .project-btn{
     color: black;
     border-color: black;
@@ -25,7 +29,7 @@
     background-color: #858dc7 !important;
 }
 
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
 }
 @media (max-width: 1200px) {
 }
@@ -34,4 +38,4 @@
 @media (max-width: 768px) {
 }
 @media (max-width: 576px) {
-}
+} */

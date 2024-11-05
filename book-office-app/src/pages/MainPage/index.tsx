@@ -22,7 +22,7 @@ export const MainPage: FC<IMainPageProps> = () => {
                 <div className="row mt-3 justify-content-between">
                     <div
                         className="col">
-                        <div className="card w-100">
+                        <div className="card w-100 mt-3">
                             <img className="card-img-top img-card" src={writeIcon} alt="Card image cap" />
                             <div className="card-body">
                                 <h5 className="">Написание</h5>
@@ -32,7 +32,7 @@ export const MainPage: FC<IMainPageProps> = () => {
                     </div>
                     <div
                         className="col">
-                        <div className="card w-100">
+                        <div className="card w-100 mt-3">
                             <img className="card-img-top img-card" src={publishIcon} alt="Card image cap" />
                             <div className="card-body">
                                 <h5 className="">Издание</h5>
@@ -42,7 +42,7 @@ export const MainPage: FC<IMainPageProps> = () => {
                     </div>
                     <div
                         className="col">
-                        <div className="card w-100">
+                        <div className="card w-100 mt-3">
                             <img className="card-img-top img-card" src={printIcon} alt="Card image cap" />
                             <div className="card-body">
                                 <h5 className="">Печать</h5>
@@ -52,7 +52,7 @@ export const MainPage: FC<IMainPageProps> = () => {
                     </div>
                     <div
                         className="col">
-                        <div className="card w-100">
+                        <div className="card w-100 mt-3">
                             <img className="card-img-top img-card" src={advIcon} alt="Card image cap" />
                             <div className="card-body">
                                 <h5 className="">Реклама</h5>

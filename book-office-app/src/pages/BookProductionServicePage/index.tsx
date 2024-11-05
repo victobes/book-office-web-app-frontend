@@ -39,7 +39,7 @@ export const BookProductionServicePage: FC<IBookProductionServicePageProps> = ()
     return (
         <>
             <Navbar />
-            <Container className="div">
+            <Container className="div content-wrapper">
                 <Breadcrumbs
                     middleItems={[
                         {

@@ -9,21 +9,26 @@ export const Navbar: FC = () => {
     return (
         <>
             <NavbarComp expand="lg"
-                        data-bs-theme="dark"
+                        data-bs-theme="light"
                         className="main-navbar"
+                        fixed="top"
             >
                 <Container>
                     <NavbarComp.Brand>
                         <Link to="/" className="text-black text-decoration-none">
-                            <strong>Книжное издательство</strong>
+                            <strong>Издательство</strong>
                         </Link>
                     </NavbarComp.Brand>
                     <NavbarComp.Toggle
                         aria-controls="basic-navbar-nav"
-                        className="outline-none"
+                        // className="black"
+                        className=""
                     />
-                    <NavbarComp.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto gap-4 gap-sm-3">
+                    <NavbarComp.Collapse 
+                        id="basic-navbar-nav"
+                        className="justify-content-end">
+                        <Nav className="me-auto">
+                        {/* gap-4 gap-sm-3 */}
                             <NavLink to="/book_production_services_list" className="text-black text-decoration-none">
                                 Услуги
                             </NavLink>

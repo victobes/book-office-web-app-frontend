@@ -5,23 +5,25 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+.content-wrapper{
+    padding-top: 60px;
+}
+
 .service-page-description {
     font-weight: 300;
     white-space: pre-line;
     color: #000000;
+    font-size: medium;
 }
 
 .service-info-img {
     border-radius: 10px;
 }
-
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
 }
 @media (max-width: 1200px) {
 }
 @media (max-width: 992px) {
 }
 @media (max-width: 768px) {
-}
-@media (max-width: 576px) {
-}
+}*/

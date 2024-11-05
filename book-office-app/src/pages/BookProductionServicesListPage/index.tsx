@@ -21,11 +21,11 @@ export const BookProductionServicesListPage: FC<IBookProductionServicesListPageP
     return (
         <>
             <Navbar />
-            <Container>
+            <Container className="content-wrapper">
                 <Breadcrumbs
                     endItem="Услуги"
                 />
-                <Container
+                <div
                     className="d-flex flex-column mt-4 mb-4 p-0"
                 >
                     <div
@@ -65,7 +65,7 @@ export const BookProductionServicesListPage: FC<IBookProductionServicesListPageP
                             Поиск
                         </Button>
                     </div>
-                </Container>
+                </div>
                 {bookProductionServicesList && !!bookProductionServicesList.length ? (
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                         {bookProductionServicesList.map((service, index) => {

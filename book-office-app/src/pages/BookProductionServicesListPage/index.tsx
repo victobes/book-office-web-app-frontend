@@ -14,6 +14,7 @@ export const BookProductionServicesListPage: FC<IBookProductionServicesListPageP
         bookProductionServicesList,
         // bookPublishingProjectId,
         selectedServicesCount,
+        searchBookProductionServiceTitle,
         handleSearchServiceClick,
         handleSearchServiceTitleChange,
     } = useBookProductionServicesListPage();
@@ -54,7 +55,8 @@ export const BookProductionServicesListPage: FC<IBookProductionServicesListPageP
                             onChange={handleSearchServiceTitleChange}
                             type="text"
                             placeholder="Введите наименование услуги"
-                            name="book_production_service_name">
+                            name="book_production_service_name"
+                            value={searchBookProductionServiceTitle}>
                         </input>
                         <Button
                             className="btn btn-outline-dark bg-white search-btn"

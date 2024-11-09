@@ -3,7 +3,7 @@ import { IGlobalProps } from "./App.typing";
 import { MainPage } from "./pages/MainPage";
 import { BookProductionServicesListPage } from "./pages/BookProductionServicesListPage";
 import { BookProductionServicePage } from "./pages/BookProductionServicePage";
-// import { BookPublishingProjectPage } from "./pages/BookPublishingProjectPage";
+import { BookPublishingProjectPage } from "./pages/BookPublishingProjectPage";
 
 export const AppRoutes = (props: IGlobalProps) => {
     const routes: RouteObject[] = [
@@ -19,10 +19,17 @@ export const AppRoutes = (props: IGlobalProps) => {
             path: "/book_production_service/:id",
             element: <BookProductionServicePage>,</BookProductionServicePage>
         },
+<<<<<<< Updated upstream
         // {
         //     path: "/book_publishing_project/:id",
         //     element: <BookPublishingProjectPage {...props} />
         // }
+=======
+        {
+            path: "/book_publishing_project/:id",
+            element: <BookPublishingProjectPage {...props} />
+        }
+>>>>>>> Stashed changes
     ];
     const routeResult = useRoutes(routes);
     return <>{routeResult}</>;

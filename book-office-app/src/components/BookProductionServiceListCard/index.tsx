@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { IBookProductionServiceListCardProps } from "./typing.tsx";
-import defaultImage from "/Users/victoria/book-office-app/src/images/unknown.jpg";
+// import defaultImage from "/Users/victoria/book-office-app/src/images/unknown.jpg";
+import defaultImage from "/unknown.jpg";
 import { Link } from "react-router-dom";
 import "/Users/victoria/book-office-app/src/components/BookProductionServiceListCard/BookProductionServiceListCard.css"
 

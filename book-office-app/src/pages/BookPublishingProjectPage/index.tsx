@@ -5,7 +5,7 @@ import { IBookPublishingProjectPageProps } from "./typing";
 import { Navbar } from "../../components/Navbar";
 import { Container } from "react-bootstrap";
 import { IBookPublishingProjectByIdResponse } from "../../core/api/bookProductionService/typing.ts";
-import { bookPublishingProject as PROJECT_MOCK} from "../../core/mock/bookPublishingProject.ts";
+import { bookPublishingProject as PROJECT_MOCK } from "../../core/mock/bookPublishingProject.ts";
 import { getBookPublishingProjectById } from "../../core/api/bookProductionService";
 import { SelectedServiceCard } from "../../components/SelectedServiceCard/index.tsx";
 import { ISelectedServiceCardProps } from "../../components/SelectedServiceCard/typing.tsx";
@@ -33,33 +33,48 @@ export const BookPublishingProjectPage: FC<IBookPublishingProjectPageProps> = ()
         <>
             <Navbar />
             <Container>
-                <div className="order-page-content-container">
-                <Breadcrumbs
-                    middleItems={[
-                        {
-                            name: "Услуги",
-                            link: "/book_production_services_list"
-                        }
-                    ]}
-                    endItem={"Проект №" + bookPublishingProjectContentData?.pk}
-                />
-                    <p className="order-page-title">Проект №{bookPublishingProjectContentData?.pk}</p>
-                    <div className="order-info-content-container">
-                        <p className="order-info-field-title">Формат:</p>
-                        <select className="format-select" name="format_info">
-                            <option value="A4" selected>A4</option>
-                            <option value="A5">A5</option>
-                            <option value="A6">A6</option>
-                            <option value="B5">B5</option>
-                            <option value="SQUARE">Квадрат</option>
-                        </select>
-                        <p className="order-info-field-title">Тираж (шт.):</p>
-                        {/* <input className="order-info-input" type="number" name="circulation_info" value="{{ data.circulation }}"> */}
+                <div className="content-wrapper">
+                    <Breadcrumbs
+                        middleItems={[
+                            {
+                                name: "Услуги",
+                                link: "/book_production_services_list"
+                            }
+                        ]}
+                        endItem={"Проект №" + bookPublishingProjectContentData?.pk}
+                    />
+                    <div className="col">
+                        <div className="row mb-3 title-container">
+                            <p className="h1"><strong>Проект №{bookPublishingProjectContentData?.pk}</strong></p>
+                        </div>
+                        <div className="row mb-3">
+                            <div className="col-3">
+                                <p className="h3"><strong>Формат:</strong></p>
+                            </div>
+                            <div className="col-9">
+                                <select className="format-select" name="format_info">
+                                    <option value="A4" selected>A4</option>
+                                    <option value="A5">A5</option>
+                                    <option value="A6">A6</option>
+                                    <option value="B5">B5</option>
+                                    <option value="SQUARE">Квадрат</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="row mb-3">
+                            <div className="col-3">
+                                <p className="h3"><strong>Тираж:</strong></p>
+                            </div>
+                            <div className="col-9">
+                                <input type="text" className="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    value={bookPublishingProjectContentData?.circulation} readOnly />
+                            </div>
+                        </div>
                     </div>
 
                     {bookPublishingProjectContentData?.services_list && !!bookPublishingProjectContentData.services_list.length ? (
-                        <div className="row row-cols-1 row-cols-md-2
-                    row-cols-lg-4 g-4">
+                        <div className="col-md-2 w-100">
                             {bookPublishingProjectContentData.services_list.map((service, index) => {
                                 const props: ISelectedServiceCardProps = {
                                     id: service.service.pk,
@@ -70,7 +85,7 @@ export const BookPublishingProjectPage: FC<IBookPublishingProjectPageProps> = ()
                                 };
                                 return (
                                     <div className="col">
-                                        <SelectedServiceCard key={index} {...props} /> 
+                                        <SelectedServiceCard key={index} {...props} />
                                     </div>
                                 );
                             })}
@@ -80,6 +95,9 @@ export const BookPublishingProjectPage: FC<IBookPublishingProjectPageProps> = ()
                             <h2>Проект Пустой</h2>
                         </Container>
                     )}
+                    <div className="d-flex justify-content-center">
+                        <button type="button" className="btn p-2 text-white bg-black"><strong>Оформить</strong></button>
+                    </div>
                 </div>
             </Container>
         </>

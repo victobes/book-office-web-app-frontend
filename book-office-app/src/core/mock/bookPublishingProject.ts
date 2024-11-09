@@ -17,7 +17,7 @@ export const bookPublishingProject: IBookPublishingProjectByIdResponse =
             service: {
                 pk: 4,
                 title: "Иллюстрирование",
-                image_url: "http://localhost:9000/book-office-services-images/4.jpg",
+                image_url: "",
                 price: "от 1200 руб.",
             },
             rate: "BASE"
@@ -26,19 +26,19 @@ export const bookPublishingProject: IBookPublishingProjectByIdResponse =
             service: {
                 pk: 3,
                 title: "Вёрстка книги",
-                image_url: "http://localhost:9000/book-office-services-images/3.jpg",
+                image_url: "",
                 price: "от 65 руб. за 1 страницу",
             },
-            rate: 'Тариф "Базовый"'
+            rate: 'BASE'
         },
         {
             service: {
                 pk: 1,
                 title: "Корректура текста",
-                image_url: "http://localhost:9000/book-office-services-images/1.jpg",
+                image_url: "",
                 price: "от 45 руб. за 1000 символов",
             },
-            rate: 'Тариф "Базовый"'
+            rate: 'PREMIUM'
         },
     ]
 };

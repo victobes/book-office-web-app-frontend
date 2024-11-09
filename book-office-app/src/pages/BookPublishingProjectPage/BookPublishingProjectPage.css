@@ -6,6 +6,14 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+.content-wrapper{
+    padding-top: 60px;
+}
+
+.title-container{
+    text-align: center;
+}
+
 body {
     background: #ffffff;
 }
@@ -34,9 +42,9 @@ body {
     padding: 100px;
 }
 
-.order-page-content-container {
+/* .order-page-content-container {
     margin: 50px 100px 10% 100px;
-}
+} */
 
 .order-info-content-container {
     width: auto;

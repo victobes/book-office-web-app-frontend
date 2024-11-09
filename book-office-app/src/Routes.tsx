@@ -19,17 +19,10 @@ export const AppRoutes = (props: IGlobalProps) => {
             path: "/book_production_service/:id",
             element: <BookProductionServicePage>,</BookProductionServicePage>
         },
-<<<<<<< Updated upstream
-        // {
-        //     path: "/book_publishing_project/:id",
-        //     element: <BookPublishingProjectPage {...props} />
-        // }
-=======
         {
             path: "/book_publishing_project/:id",
             element: <BookPublishingProjectPage {...props} />
         }
->>>>>>> Stashed changes
     ];
     const routeResult = useRoutes(routes);
     return <>{routeResult}</>;

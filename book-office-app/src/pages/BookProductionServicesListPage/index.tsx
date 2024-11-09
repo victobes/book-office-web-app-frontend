@@ -12,7 +12,6 @@ import { Breadcrumbs } from "../../components/Breadcrumbs";
 export const BookProductionServicesListPage: FC<IBookProductionServicesListPageProps> = () => {
     const {
         bookProductionServicesList,
-        // bookPublishingProjectId,
         selectedServicesCount,
         searchBookProductionServiceTitle,
         handleSearchServiceClick,
@@ -32,11 +31,8 @@ export const BookProductionServicesListPage: FC<IBookProductionServicesListPageP
                         className="d-flex justify-content-end"
                     >
                         <Link
-                            // to={"/book_publishing_project/" + bookPublishingProjectId}
                             to={"/book_publishing_project/" + 1}
                             className="btn pt-0 pb-0 project-btn-blocked"
-                            // className={bookPublishingProjectId !== undefined && bookPublishingProjectId !== null ? "btn" : "btn non-clickable"}
-                            // state={{ from: bookPublishingProjectId }}>
                             state={{ from: 1 }}>
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path

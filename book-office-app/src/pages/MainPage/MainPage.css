@@ -21,7 +21,8 @@
 }
 
 .bg{
-    background-image: url('/Users/victoria/book-office-app/src/images/background-image2.jpg');
+    /* background-image: url('/Users/victoria/book-office-app/src/images/background-image2.jpg'); */
+    background-image: url('book-office-app/src/images/background-image2.jpg'); 
     background-size: cover; 
     background-position: center; 
     margin-top: 40px;

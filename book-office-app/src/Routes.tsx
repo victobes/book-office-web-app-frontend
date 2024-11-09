@@ -19,10 +19,6 @@ export const AppRoutes = (props: IGlobalProps) => {
             path: "/book_production_service/:id",
             element: <BookProductionServicePage>,</BookProductionServicePage>
         },
-        // {
-        //     path: "/book_publishing_project/:id",
-        //     element: <BookPublishingProjectPage {...props} />
-        // }
     ];
     const routeResult = useRoutes(routes);
     return <>{routeResult}</>;

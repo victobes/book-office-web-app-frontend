@@ -7,6 +7,7 @@ import { BookPublishingProjectPage } from "./pages/BookPublishingProjectPage";
 import { SignUpPage } from "./pages/SignUpPage";
 import { LogInPage } from "./pages/LogInPage";
 import { UserAccountPage } from "./pages/UserAccountPage";
+import { BookPublishingProjectsListPage } from "./pages/BookPublishingProjectsListPage";
 
 export const AppRoutes = (props: IGlobalProps) => {
     const routes: RouteObject[] = [
@@ -25,6 +26,10 @@ export const AppRoutes = (props: IGlobalProps) => {
         {
             path: "/book_publishing_project/:id",
             element: <BookPublishingProjectPage {...props} />
+        },
+        {
+            path: "/book_publishing_projects_list",
+            element: <BookPublishingProjectsListPage {...props}/>,
         },
         {
             path: "/sign_up",

@@ -26,11 +26,16 @@ export const Navbar: FC = () => {
                     />
                     <NavbarComp.Collapse
                         id="basic-navbar-nav"
-                        className="justify-content-end">
-                        <Nav className="me-auto">
+                        className="justify-content-left">
+                        <Nav className="me-3">
                             {/* gap-4 gap-sm-3 */}
                             <NavLink to="/book_production_services_list" className="text-black text-decoration-none">
                                 Услуги
+                            </NavLink>
+                        </Nav>
+                        <Nav className="me-3">
+                            <NavLink to="/book_publishing_projects_list" className="text-black text-decoration-none">
+                                Проекты
                             </NavLink>
                         </Nav>
                     </NavbarComp.Collapse>

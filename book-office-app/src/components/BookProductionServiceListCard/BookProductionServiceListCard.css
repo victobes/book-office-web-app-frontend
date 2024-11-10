@@ -21,3 +21,7 @@
 .status-btn:hover{
     background-color: #858dc7 !important;
 }
+
+.border-black{
+    border-color: black !important;
+}

@@ -6,6 +6,7 @@ import { BookProductionServicePage } from "./pages/BookProductionServicePage";
 import { BookPublishingProjectPage } from "./pages/BookPublishingProjectPage";
 import { SignUpPage } from "./pages/SignUpPage";
 import { LogInPage } from "./pages/LogInPage";
+import { UserAccountPage } from "./pages/UserAccountPage";
 
 export const AppRoutes = (props: IGlobalProps) => {
     const routes: RouteObject[] = [
@@ -32,6 +33,10 @@ export const AppRoutes = (props: IGlobalProps) => {
         {
             path: "/log_in",
             element: <LogInPage {...props}/>,
+        },
+        {
+            path: "/user_account",
+            element: <UserAccountPage {...props}/>,
         },
     ];
     const routeResult = useRoutes(routes);

@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.status-btn:hover{
+    background-color: #858dc7 !important;
+}
+
+.border-black{
+    border-color: black !important;
+    border-width: 2px !important;
+}

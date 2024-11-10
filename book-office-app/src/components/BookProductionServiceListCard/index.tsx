@@ -23,7 +23,7 @@ export const BookProductionServiceListCard: FC<IBookProductionServiceListCardPro
                     state={{ from: book_production_service.title }}>
                     <strong>Читать подробнее</strong>
                 </Link>
-                <button className="btn mt-2 btn-outline-dark text-black border-black">
+                <button className="btn mt-2 btn-outline-dark text-black border-black status-btn">
                     <strong>Выбрать услугу</strong>
                 </button>
             </div>

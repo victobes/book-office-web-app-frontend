@@ -1,6 +1,37 @@
-import { FC } from "react";
-import { ISignUpFormProps } from "./typing.tsx";
+import { FC, useState } from "react";
+import { ISignUpFormProps, IUserSignUpData } from "./typing.tsx";
+import { ChangeEvent } from "../../App.typing.tsx";
+import { api } from "../../core/api";
+import { useNavigate } from "react-router-dom";
+
 export const SignUpForm: FC<ISignUpFormProps> = () => {
+    const navigate = useNavigate();
+
+    const [loginFormData, setLoginFormData] = useState<IUserSignUpData>({
+        username: "",
+        email: "",
+        password: "",
+    });
+
+    const handleChange = (event: ChangeEvent) => {
+        const { id, value } = event.target;
+        setLoginFormData((prevState) => ({ ...prevState, [id]: value }));
+    }
+
+    const clickSignUp = () => {
+        if (loginFormData.username && loginFormData.password) {
+            api.users.usersSignUpCreate(loginFormData)
+                .then((data) => {
+                    console.log("success", data)
+                    // TODO: алерт успеха
+                    navigate('/login');
+                })
+                .catch((data) => {
+                    console.log("fail", data) // TODO: алерт фейла
+                });
+        }
+    }
+
     return (
         <div className="card border-black" style={{ width: '100%', maxWidth: '350px' }}>
             <div className="card-body">
@@ -15,6 +46,8 @@ export const SignUpForm: FC<ISignUpFormProps> = () => {
                             id="username"
                             className="form-control"
                             placeholder="Введите логин"
+                            value={loginFormData.username}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -27,6 +60,8 @@ export const SignUpForm: FC<ISignUpFormProps> = () => {
                             id="email"
                             className="form-control"
                             placeholder="Введите e-mail"
+                            value={loginFormData.email}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -39,11 +74,13 @@ export const SignUpForm: FC<ISignUpFormProps> = () => {
                             id="password"
                             className="form-control"
                             placeholder="Введите пароль"
+                            value={loginFormData.password}
+                            onChange={handleChange}
                             required
                         />
                     </div>
-                    <button type="submit" className="btn text-white bg-black status-btn w-100">
-                       <strong>Зарегистрироваться</strong>
+                    <button type="button" className="btn text-white bg-black status-btn w-100" onClick={clickSignUp}>
+                        <strong>Зарегистрироваться</strong>
                     </button>
                 </form>
             </div>

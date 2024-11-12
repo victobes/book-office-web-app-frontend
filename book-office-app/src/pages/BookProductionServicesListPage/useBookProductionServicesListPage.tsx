@@ -12,11 +12,11 @@ import { BookProductionService } from "../../core/api/Api.ts";
 
 export const useBookProductionServicesListPage = () => {
     const [bookProductionServicesList, setBookProductionServicesList] = useState<BookProductionService[]>([]);
-    const { searchBookProductionServiceTitle } = useSelector(selectApp);
-    const dispatch = useDispatch();
-
     const [bookPublishingProjectId, setBookPublishingProjectId] = useState<number>();
     const [selectedServicesCount, setSelectedServicesCount] = useState<number>(0);
+    
+    const { searchBookProductionServiceTitle } = useSelector(selectApp);
+    const dispatch = useDispatch();
 
     const handleSearchServiceClick = () => {
         api.bookProductionService.bookProductionServiceList({book_production_service_name: searchBookProductionServiceTitle})

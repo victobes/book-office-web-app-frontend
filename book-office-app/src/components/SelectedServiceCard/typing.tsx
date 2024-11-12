@@ -1,7 +1,7 @@
 export interface ISelectedServiceCardProps {
-    id: number;
+    id?: number;
     title: string;
     price: string;
-    imageUrl: string;
-    rate: string;
+    imageUrl?: string;
+    rate?: string;
 }

@@ -1,6 +1,6 @@
-import { IBookProductionService } from "../api/bookProductionService/typing";
+import { BookProductionService } from "../api/Api.ts";
 
-export const bookProductionServicesList: IBookProductionService[] = [
+export const bookProductionServicesList: BookProductionService[] = [
         {
             pk: 1,
             title: "Корректура текста",

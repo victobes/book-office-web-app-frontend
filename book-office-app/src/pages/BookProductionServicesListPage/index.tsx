@@ -5,9 +5,9 @@ import { Navbar } from "../../components/Navbar";
 import { Button, Container } from "react-bootstrap";
 import { BookProductionServiceListCard } from "../../components/BookProductionServiceListCard";
 import { useBookProductionServicesListPage } from "./useBookProductionServicesListPage";
-import { IBookProductionServiceListCardProps } from "../../components/BookProductionServiceListCard/typing";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
+import { IBookProductionServiceListCardProps } from "../../components/BookProductionServiceListCard/typing";
 
 export const BookProductionServicesListPage: FC<IBookProductionServicesListPageProps> = () => {
     const {
@@ -68,10 +68,10 @@ export const BookProductionServicesListPage: FC<IBookProductionServicesListPageP
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                         {bookProductionServicesList.map((service, index) => {
                             const props: IBookProductionServiceListCardProps = {
-                                id: service.pk,
+                                id: service.pk || 0,
                                 title: service.title,
                                 price: service.price,
-                                imageUrl: service.image_url,
+                                imageUrl: service.image_url || "",
                             };
 
                             return (

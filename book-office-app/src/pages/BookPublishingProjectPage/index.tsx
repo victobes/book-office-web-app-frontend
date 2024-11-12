@@ -4,23 +4,23 @@ import { useParams } from "react-router-dom";
 import { IBookPublishingProjectPageProps } from "./typing";
 import { Navbar } from "../../components/Navbar";
 import { Container } from "react-bootstrap";
-import { IBookPublishingProjectByIdResponse } from "../../core/api/bookProductionService/typing.ts";
 import { bookPublishingProject as PROJECT_MOCK } from "../../core/mock/bookPublishingProject.ts";
-import { getBookPublishingProjectById } from "../../core/api/bookProductionService";
 import { SelectedServiceCard } from "../../components/SelectedServiceCard/index.tsx";
 import { ISelectedServiceCardProps } from "../../components/SelectedServiceCard/typing.tsx";
 import { Breadcrumbs } from "../../components/Breadcrumbs/index.tsx";
+import { api } from "../../core/api";
+import { FullBookPublishingProject, Related } from "../../core/api/Api.ts";
 
 export const BookPublishingProjectPage: FC<IBookPublishingProjectPageProps> = () => {
     const { id } = useParams();
     const [bookPublishingProjectContentData, setBookPublishingProjectContentData] =
-        useState<IBookPublishingProjectByIdResponse>();
+        useState<FullBookPublishingProject>();
 
     useEffect(() => {
         if (id) {
-            getBookPublishingProjectById(id)
+            api.bookPublishingProject.bookPublishingProjectRead(id)
                 .then((data) => {
-                    setBookPublishingProjectContentData(data);
+                    setBookPublishingProjectContentData(data.data);
                 })
                 .catch(() => {
                     setBookPublishingProjectContentData(PROJECT_MOCK)
@@ -68,19 +68,19 @@ export const BookPublishingProjectPage: FC<IBookPublishingProjectPageProps> = ()
                             <div className="col-9">
                                 <input type="text" className="form-control" aria-label="Sizing example input"
                                     aria-describedby="inputGroup-sizing-default"
-                                    value={bookPublishingProjectContentData?.circulation} readOnly />
+                                    value={bookPublishingProjectContentData?.circulation?.toString()} readOnly />
                             </div>
                         </div>
                     </div>
 
                     {bookPublishingProjectContentData?.services_list && !!bookPublishingProjectContentData.services_list.length ? (
                         <div className="col-md-2 w-100">
-                            {bookPublishingProjectContentData.services_list.map((service, index) => {
+                            {bookPublishingProjectContentData.services_list.map((service: Related, index: number) => {
                                 const props: ISelectedServiceCardProps = {
                                     id: service.service.pk,
                                     title: service.service.title,
                                     price: service.service.price,
-                                    imageUrl: service.service.image_url,
+                                    imageUrl: service.service.image_url || undefined, // TODO: Что-то тут не так
                                     rate: service.rate,
                                 };
                                 return (

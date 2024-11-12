@@ -1,6 +1,6 @@
-import { IBookPublishingProjectByIdResponse } from "../api/bookProductionService/typing";
+import { FullBookPublishingProject } from "../api/Api.ts";
 
-export const bookPublishingProject: IBookPublishingProjectByIdResponse =
+export const bookPublishingProject: FullBookPublishingProject =
 {
     pk: 1,
     creation_datetime: "2024-10-24T15:20:14.219Z",

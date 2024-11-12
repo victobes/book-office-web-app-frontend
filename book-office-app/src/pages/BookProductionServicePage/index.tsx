@@ -1,23 +1,23 @@
 import "/Users/victoria/book-office-app/src/pages/BookProductionServicePage/BookProuctionServicePage.css";
 import { Container } from "react-bootstrap";
-import { IBookProductionService } from "../../core/api/bookProductionService/typing";
 import { IBookProductionServicePageProps } from "./typing";
 import { bookProductionServicesList as SERVICES_LIST_MOCK } from "../../core/mock/bookProductionServicesList.ts";
-import { getBookProductionServiceById } from "../../core/api/bookProductionService"
 import defaultImage from "/Users/victoria/book-office-app/src/images/unknown.jpg";
 import { useParams } from "react-router-dom";
 import { FC, useEffect, useState } from "react";
 import { Breadcrumbs } from "../../components/Breadcrumbs/index.tsx";
 import { Navbar } from "../../components/Navbar/index.tsx";
+import { api } from "../../core/api";
+import { BookProductionService } from "../../core/api/Api.ts";
 
 export const BookProductionServicePage: FC<IBookProductionServicePageProps> = () => {
     const { id } = useParams();
-    const [bookProductionServiceData, setBookProductionServiceData] = useState<IBookProductionService | null>(null);
+    const [bookProductionServiceData, setBookProductionServiceData] = useState<BookProductionService | null>(null);
 
     useEffect(() => {
         if (id) {
-            getBookProductionServiceById(id).then((data) => {
-                setBookProductionServiceData(data)
+            api.bookProductionService.bookProductionServiceRead(id).then((data) => {
+                setBookProductionServiceData(data.data)
             })
                 .catch(() => {
                     const book_production_service = SERVICES_LIST_MOCK.find(

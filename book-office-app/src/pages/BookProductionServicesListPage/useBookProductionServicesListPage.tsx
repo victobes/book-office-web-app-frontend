@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { IBookProductionService } from "../../core/api/bookProductionService/typing.tsx";
-import { getBookProductionServicesList } from "../../core/api/bookProductionService/index.ts";
 import { selectApp } from "../../core/store/slices/selectors.ts";
 import { useSelector, useDispatch } from "../../core/store/index.ts";
 
@@ -9,9 +7,11 @@ import { bookPublishingProject as PROJECT_MOCK } from "../../core/mock/bookPubli
 
 import { ChangeEvent } from "../../App.typing";
 import { saveBookProductionServiceTitle } from "../../core/store/slices/appSlice.ts";
+import { api } from "../../core/api";
+import { BookProductionService } from "../../core/api/Api.ts";
 
 export const useBookProductionServicesListPage = () => {
-    const [bookProductionServicesList, setBookProductionServicesList] = useState<IBookProductionService[]>([]);
+    const [bookProductionServicesList, setBookProductionServicesList] = useState<BookProductionService[]>([]);
     const { searchBookProductionServiceTitle } = useSelector(selectApp);
     const dispatch = useDispatch();
 
@@ -19,9 +19,9 @@ export const useBookProductionServicesListPage = () => {
     const [selectedServicesCount, setSelectedServicesCount] = useState<number>(0);
 
     const handleSearchServiceClick = () => {
-        getBookProductionServicesList(searchBookProductionServiceTitle)
+        api.bookProductionService.bookProductionServiceList({book_production_service_name: searchBookProductionServiceTitle})
             .then((data) => {
-                setBookProductionServicesList(data.book_production_services);
+                setBookProductionServicesList(data.data.book_production_services);
             })
             .catch(() => {
                 const filteredBookProductionServices = SERVICES_LIST_MOCK.filter((book_production_service) =>
@@ -36,11 +36,11 @@ export const useBookProductionServicesListPage = () => {
     };
 
     useEffect(() => {
-        getBookProductionServicesList(searchBookProductionServiceTitle)
+        api.bookProductionService.bookProductionServiceList({book_production_service_name: searchBookProductionServiceTitle})
             .then((data) => {
-                setBookProductionServicesList(data.book_production_services);
-                setBookPublishingProjectId(data.book_publishing_project_id)
-                setSelectedServicesCount(data.selected_services_count)
+                setBookProductionServicesList(data.data.book_production_services);
+                setBookPublishingProjectId(data.data.book_publishing_project_id || undefined)
+                setSelectedServicesCount(data.data?.selected_services_count || 0)
             })
             .catch(() => {
                 const filteredBookProductionServices = SERVICES_LIST_MOCK.filter((service) =>

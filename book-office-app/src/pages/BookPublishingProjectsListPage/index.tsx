@@ -1,13 +1,11 @@
 import "./BookPublishingProjectsListPage.css";
-import { FC } from "react";
 import { Container } from "react-bootstrap";
-import { IBookPublishingProjectsListPageProps } from "./typing";
 import { Navbar } from "../../components/Navbar";
 import { BPPFilters } from "../../components/BPPFilters";
 import { useBookPublishingProjectsListPage } from "./useBookPublishingProjectsListPage";
 import { BPPTable } from "../../components/BPPTable";
 
-export const BookPublishingProjectsListPage: FC<IBookPublishingProjectsListPageProps> = () => {
+export const BookPublishingProjectsListPage = () => {
    const {tableProps, filtersProps} = useBookPublishingProjectsListPage();
 
     return (

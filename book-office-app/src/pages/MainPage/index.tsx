@@ -1,6 +1,4 @@
 import "./MainPage.css";
-import { FC } from "react";
-import { IMainPageProps } from "./typing";
 import { Container } from "react-bootstrap";
 import { Navbar } from "../../components/Navbar";
 import writeIcon from "/Users/victoria/book-office-app/src/icons/writing.svg";
@@ -8,7 +6,7 @@ import printIcon from "/Users/victoria/book-office-app/src/icons/printing.svg";
 import publishIcon from "/Users/victoria/book-office-app/src/icons/publishing.svg";
 import advIcon from "/Users/victoria/book-office-app/src/icons/adv.svg";
 
-export const MainPage: FC<IMainPageProps> = () => {
+export const MainPage = () => {
     return (
         <>
             <Navbar />

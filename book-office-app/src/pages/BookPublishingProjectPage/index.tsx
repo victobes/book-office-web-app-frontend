@@ -1,7 +1,6 @@
 import "./BookPublishingProjectPage.css";
-import { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { IBookPublishingProjectPageProps } from "./typing";
 import { Navbar } from "../../components/Navbar";
 import { Container } from "react-bootstrap";
 import { bookPublishingProject as PROJECT_MOCK } from "../../core/mock/bookPublishingProject.ts";
@@ -11,7 +10,7 @@ import { Breadcrumbs } from "../../components/Breadcrumbs/index.tsx";
 import { api } from "../../core/api";
 import { FullBookPublishingProject, Related } from "../../core/api/Api.ts";
 
-export const BookPublishingProjectPage: FC<IBookPublishingProjectPageProps> = () => {
+export const BookPublishingProjectPage = () => {
     const { id } = useParams();
     const [bookPublishingProjectContentData, setBookPublishingProjectContentData] =
         useState<FullBookPublishingProject>();

@@ -1,9 +1,5 @@
-export interface IGlobalProps {
-    isLogin: boolean;
-    logout: () => void;
-    login: () => void;
-    useAuth: () => boolean;
-}
-/* export type IconType = SVGProps<SVGSVGElement>; */
+import React from "react";
+
 export type ChangeEvent = React.ChangeEvent<HTMLInputElement>;
+
 export type ClickEvent = React.MouseEvent<HTMLButtonElement>;

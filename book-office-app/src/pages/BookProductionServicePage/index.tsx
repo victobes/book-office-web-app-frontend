@@ -1,16 +1,15 @@
 import "/Users/victoria/book-office-app/src/pages/BookProductionServicePage/BookProuctionServicePage.css";
 import { Container } from "react-bootstrap";
-import { IBookProductionServicePageProps } from "./typing";
 import { bookProductionServicesList as SERVICES_LIST_MOCK } from "../../core/mock/bookProductionServicesList.ts";
 import defaultImage from "/Users/victoria/book-office-app/src/images/unknown.jpg";
 import { useParams } from "react-router-dom";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Breadcrumbs } from "../../components/Breadcrumbs/index.tsx";
 import { Navbar } from "../../components/Navbar/index.tsx";
 import { api } from "../../core/api";
 import { BookProductionService } from "../../core/api/Api.ts";
 
-export const BookProductionServicePage: FC<IBookProductionServicePageProps> = () => {
+export const BookProductionServicePage = () => {
     const { id } = useParams();
     const [bookProductionServiceData, setBookProductionServiceData] = useState<BookProductionService | null>(null);
 

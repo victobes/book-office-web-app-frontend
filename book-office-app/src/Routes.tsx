@@ -1,5 +1,4 @@
 import { RouteObject, useRoutes } from "react-router-dom";
-import { IGlobalProps } from "./App.typing";
 import { MainPage } from "./pages/MainPage";
 import { BookProductionServicesListPage } from "./pages/BookProductionServicesListPage";
 import { BookProductionServicePage } from "./pages/BookProductionServicePage";
@@ -8,42 +7,58 @@ import { SignUpPage } from "./pages/SignUpPage";
 import { LogInPage } from "./pages/LogInPage";
 import { UserAccountPage } from "./pages/UserAccountPage";
 import { BookPublishingProjectsListPage } from "./pages/BookPublishingProjectsListPage";
+import { MainLayout } from "./components/MainLayout";
+import { PrivatePageFirewall } from "./components/PrivatePageFirewall";
 
-export const AppRoutes = (props: IGlobalProps) => {
+export const AppRoutes = () => {
     const routes: RouteObject[] = [
         {
-            path: "/",
-            element: <MainPage {...props} />,
+            element: <MainLayout />,
+            children: [
+                {
+                    element: <PrivatePageFirewall />,
+                    children: [
+                        {
+                            path: "/book_publishing_project/:id",
+                            element: <BookPublishingProjectPage />
+                        },
+                        {
+                            path: "/book_publishing_projects_list",
+                            element: <BookPublishingProjectsListPage />,
+                        },
+                    ],
+                },
+                {
+                    path: "/",
+                    element: <MainPage/>,
+                },
+                {
+                    path: "/book_production_services_list",
+                    element: <BookProductionServicesListPage/>
+                },
+                {
+                    path: "/book_production_service/:id",
+                    element: <BookProductionServicePage/>
+                },
+
+                {
+                    path: "/sign_up",
+                    element: <SignUpPage/>,
+                },
+                {
+                    path: "/log_in",
+                    element: <LogInPage/>,
+                },
+                {
+                    path: "/user_account",
+                    element: <UserAccountPage/>,
+                },
+            ],
         },
-        {
-            path: "/book_production_services_list",
-            element: <BookProductionServicesListPage {...props} />
-        },
-        {
-            path: "/book_production_service/:id",
-            element: <BookProductionServicePage>,</BookProductionServicePage>
-        },
-        {
-            path: "/book_publishing_project/:id",
-            element: <BookPublishingProjectPage {...props} />
-        },
-        {
-            path: "/book_publishing_projects_list",
-            element: <BookPublishingProjectsListPage {...props}/>,
-        },
-        {
-            path: "/sign_up",
-            element: <SignUpPage {...props}/>,
-        },
-        {
-            path: "/log_in",
-            element: <LogInPage {...props}/>,
-        },
-        {
-            path: "/user_account",
-            element: <UserAccountPage {...props}/>,
-        },
+
     ];
+
     const routeResult = useRoutes(routes);
+
     return <>{routeResult}</>;
-};
+}   

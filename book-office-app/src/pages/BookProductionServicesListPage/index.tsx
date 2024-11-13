@@ -1,6 +1,4 @@
 import "./BookProductionServicesListPage.css";
-import { FC } from "react";
-import { IBookProductionServicesListPageProps } from "./typing";
 import { Navbar } from "../../components/Navbar";
 import { Button, Container } from "react-bootstrap";
 import { BookProductionServiceListCard } from "../../components/BookProductionServiceListCard";
@@ -9,7 +7,7 @@ import { Link } from "react-router-dom";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { IBookProductionServiceListCardProps } from "../../components/BookProductionServiceListCard/typing";
 
-export const BookProductionServicesListPage: FC<IBookProductionServicesListPageProps> = () => {
+export const BookProductionServicesListPage = () => {
     const {
         bookProductionServicesList,
         bookPublishingProjectId,

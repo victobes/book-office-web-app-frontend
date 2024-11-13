@@ -31,10 +31,11 @@ export const SignUpForm: FC<ISignUpFormProps> = () => {
                             isError: false,
                         })
                     );
-                    navigate('/login');
+                    navigate('/log_in');
                 })
                 .catch((data) => {
                     if (data.status == 400) {
+                        console.log("signup 404", data)
                         store.dispatch(
                             addNotification({
                                 message: "Пользователь с указанным логином уже существует",
@@ -42,6 +43,7 @@ export const SignUpForm: FC<ISignUpFormProps> = () => {
                             })
                         );
                     } else {
+                        console.log("server err", data)
                         store.dispatch(
                             addNotification({
                                 message: "Ошибка сервера",

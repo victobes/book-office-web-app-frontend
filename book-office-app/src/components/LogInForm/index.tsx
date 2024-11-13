@@ -35,6 +35,7 @@ export const LogInForm: FC<ILoginFormProps> = () => {
                 })
                 .catch((data) => {
                     if (data.status == 400) {
+                        console.log("login 404", data)
                         store.dispatch(
                             addNotification({
                                 message: "Неверный логин или пароль",
@@ -42,6 +43,7 @@ export const LogInForm: FC<ILoginFormProps> = () => {
                             })
                         );
                     } else {
+                        console.log("signup server err", data)
                         store.dispatch(
                             addNotification({
                                 message: "Ошибка сервера",
@@ -86,7 +88,7 @@ export const LogInForm: FC<ILoginFormProps> = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className="btn text-white bg-black status-btn w-100" onClick={clickLogIn}>
+                    <button type="button" className="btn text-white bg-black status-btn w-100" onClick={clickLogIn}>
                         <strong>Войти</strong>
                     </button>
                 </form>

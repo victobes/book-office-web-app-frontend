@@ -11,7 +11,7 @@ export const PrivatePageFirewall: FC<IPrivatePageFirewallProps> = (props) => {
     if (!isAuth) {
         return (
             <Navigate
-                to="/login"
+                to="/log_in"
                 state={{
                     from: location.pathname,
                 }}

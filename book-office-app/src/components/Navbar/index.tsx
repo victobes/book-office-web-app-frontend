@@ -13,6 +13,7 @@ import {USER_NAME} from "../../env.tsx";
 
 export const Navbar: FC = () => {
     const { isAuth, username } = useSelector(selectUser);
+    
     const dispatch = useDispatch();
 
     const logout = () => {

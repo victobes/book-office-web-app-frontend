@@ -1,19 +1,22 @@
 import './App.css'
-import { BrowserRouter } from 'react-router-dom'
 import { AppRoutes } from "./Routes"
-import { useGlobalProps } from "./hooks/useGlobalProps"
-import { Provider } from "react-redux";
-import { store } from './core/store';
+import { useDispatch } from "./core/store";
+import { USER_NAME } from './env';
+import { saveUser } from "./core/store/slices/userSlice.ts";
 
 function App() {
-  const globalProps = useGlobalProps();
+  const dispatch = useDispatch();
+  const username = localStorage.getItem(USER_NAME);
+  const isAuth = !!username;
+  dispatch(
+    saveUser({
+      username: username || "",
+      isAuth: isAuth,
+    })
+  );
 
   return (
-    <BrowserRouter basename='/book-office-web-app-frontend'>
-      <Provider store={store}>
-        <AppRoutes {...globalProps} />
-      </Provider>
-    </BrowserRouter>
+    <AppRoutes />
   )
 }
 

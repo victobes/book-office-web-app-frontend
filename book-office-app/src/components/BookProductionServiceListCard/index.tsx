@@ -4,8 +4,44 @@ import { IBookProductionServiceListCardProps } from "./typing.tsx";
 import defaultImage from "/unknown.jpg";
 import { Link } from "react-router-dom";
 import "/Users/victoria/book-office-app/src/components/BookProductionServiceListCard/BookProductionServiceListCard.css"
+import {store, useSelector} from "../../core/store";
+import {selectUser} from "../../core/store/slices/selectors.ts";
+import {api} from "../../core/api";
+import {addNotification} from "../../core/store/slices/appSlice.ts";
 
 export const BookProductionServiceListCard: FC<IBookProductionServiceListCardProps> = (book_production_service: IBookProductionServiceListCardProps) => {
+    const {isAuth} = useSelector(selectUser);
+    const clickAddItem = () => {
+        api.bookProductionService.bookProductionServiceAddCreate(book_production_service.id.toString())
+            .then(() => {
+                book_production_service.updateBPSListPageFunc();
+                store.dispatch(
+                    addNotification({
+                        message: "Услуга выбрана в проект",
+                        isError: false,
+                    })
+                );
+            })
+            .catch((data) => {
+                    if (data.status == 400) {
+                        store.dispatch(
+                            addNotification({
+                                message: "Услуга уже есть в проекте",
+                                isError: true,
+                            })
+                        );
+                    } else {
+                        store.dispatch(
+                            addNotification({
+                                message: "Ошибка сервера",
+                                isError: true,
+                            })
+                        );
+                    }
+                }
+            )
+    };
+
     return (
         <div className="card h-100 service-card-container">
             <div className="card-body d-flex flex-column">
@@ -23,9 +59,17 @@ export const BookProductionServiceListCard: FC<IBookProductionServiceListCardPro
                     state={{ from: book_production_service.title }}>
                     <strong>Читать подробнее</strong>
                 </Link>
-                <button className="btn mt-2 btn-outline-dark text-black border-black status-btn">
-                    <strong>Выбрать услугу</strong>
-                </button>
+                {
+                    isAuth ?
+                        <button
+                            className="btn mt-2 btn-outline-dark text-black border-black status-btn"
+                            onClick={clickAddItem}
+                        >
+                            <strong>Выбрать услугу</strong>
+                        </button>
+                        :
+                        <></>
+                }
             </div>
         </div>
     );

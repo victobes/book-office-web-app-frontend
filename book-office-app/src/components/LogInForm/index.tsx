@@ -6,6 +6,7 @@ import { store, useDispatch } from "../../core/store";
 import { saveUser } from "../../core/store/slices/userSlice.ts";
 import { useNavigate } from 'react-router-dom';
 import { addNotification } from "../../core/store/slices/appSlice.ts";
+import {USER_NAME} from "../../env.tsx";
 
 export const LogInForm: FC<ILoginFormProps> = () => {
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ export const LogInForm: FC<ILoginFormProps> = () => {
             api.users.usersLogInCreate(loginFormData)
                 .then(() => {
                     dispatch(saveUser({ username: loginFormData.username, isAuth: true }))
+                    localStorage.setItem(USER_NAME, loginFormData.username);
                     store.dispatch(
                         addNotification({
                             message: "Добро пожаловать!",

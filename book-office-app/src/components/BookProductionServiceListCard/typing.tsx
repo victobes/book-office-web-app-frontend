@@ -3,4 +3,5 @@ export interface IBookProductionServiceListCardProps {
     title: string;
     price: string;
     imageUrl: string;
+    updateBPSListPageFunc: () => void;
 }

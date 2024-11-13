@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 interface IUser {
     username: string;
     isAuth: boolean;
+    BPPId?: number;
 }
 const initialState: IUser = {
     isAuth: false,
@@ -14,14 +15,19 @@ export const userSlice = createSlice({
         refreshUser: (state) => {
             state.isAuth = false;
             state.username = "";
+            state.BPPId = undefined;
         },
         saveUser: (state, action: PayloadAction<IUser>) => {
             state.username = action.payload.username;
             state.isAuth = action.payload.isAuth;
         },
+        saveBPPId: (state, action: PayloadAction<number>) => {
+            state.BPPId = action.payload;
+        },
     },
 });
 export const {
     saveUser,
-    refreshUser
+    refreshUser,
+    saveBPPId
 } = userSlice.actions;

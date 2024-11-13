@@ -10,9 +10,11 @@ import { saveBookProductionServiceTitle } from "../../core/store/slices/appSlice
 import { api } from "../../core/api";
 import { BookProductionService } from "../../core/api/Api.ts";
 
+import { saveBPPId } from "../../core/store/slices/userSlice.ts";
+
 export const useBookProductionServicesListPage = () => {
     const [bookProductionServicesList, setBookProductionServicesList] = useState<BookProductionService[]>([]);
-    const [bookPublishingProjectId, setBookPublishingProjectId] = useState<number>();
+    const BPPId = useSelector(state => state.user.BPPId);
     const [selectedServicesCount, setSelectedServicesCount] = useState<number>(0);
 
     const { searchBookProductionServiceTitle } = useSelector(selectApp);
@@ -22,12 +24,16 @@ export const useBookProductionServicesListPage = () => {
         api.bookProductionService.bookProductionServiceList({book_production_service_name: searchBookProductionServiceTitle})
             .then((data) => {
                 setBookProductionServicesList(data.data.book_production_services);
+                dispatch(saveBPPId(data.data.book_publishing_project_id || 0))
+                setSelectedServicesCount(data.data?.selected_services_count || 0)
             })
             .catch(() => {
                 const filteredBookProductionServices = SERVICES_LIST_MOCK.filter((book_production_service) =>
                     book_production_service.title.toLowerCase().startsWith(searchBookProductionServiceTitle.toLowerCase())
                 );
                 setBookProductionServicesList(filteredBookProductionServices);
+                dispatch(saveBPPId(1))
+                setSelectedServicesCount(PROJECT_MOCK.services_list.length)
             });
     };
 
@@ -35,33 +41,19 @@ export const useBookProductionServicesListPage = () => {
         dispatch(saveBookProductionServiceTitle(e.target.value))
     };
 
-    useEffect(() => {
-        api.bookProductionService.bookProductionServiceList({book_production_service_name: searchBookProductionServiceTitle})
-            .then((data) => {
-                setBookProductionServicesList(data.data.book_production_services);
-                setBookPublishingProjectId(data.data.book_publishing_project_id || 0)
-                setSelectedServicesCount(data.data?.selected_services_count || 0)
-            })
-            .catch(() => {
-                const filteredBookProductionServices = SERVICES_LIST_MOCK.filter((service) =>
-                    service.title.toLowerCase().startsWith(searchBookProductionServiceTitle.toLowerCase())
-                );
-                setBookProductionServicesList(filteredBookProductionServices);
-                setBookPublishingProjectId(PROJECT_MOCK.pk)
-                setSelectedServicesCount(PROJECT_MOCK.services_list.length)
-            });
-    }, []);
+    useEffect(handleSearchServiceClick, [])
 
-    useEffect(() => {
-        if (bookProductionServicesList && bookProductionServicesList.length) {
-        }
-    }, [bookProductionServicesList]);
+    // useEffect(() => {
+    //     if (bookProductionServicesList && bookProductionServicesList.length) {
+    //     }
+    // }, [bookProductionServicesList]);
 
     return {
         bookProductionServicesList,
-        bookPublishingProjectId,
+        BPPId,
         searchBookProductionServiceTitle,
         selectedServicesCount,
+        updateBPSListPageFunc: handleSearchServiceClick,
         handleSearchServiceClick,
         handleSearchServiceTitleChange,
     };

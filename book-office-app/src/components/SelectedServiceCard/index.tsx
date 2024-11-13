@@ -1,13 +1,51 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 // import degaultImage from "/Users/victoria/book-office-app/src/images/unknown.jpg"
 import { Link } from "react-router-dom"
 import { ISelectedServiceCardProps } from "./typing";
 import defaultImage from "/unknown.jpg";
+import { ChangeEventSelect } from "../../App.typing.tsx";
+import { api } from "../../core/api";
+import { store } from "../../core/store";
+import { addNotification } from "../../core/store/slices/appSlice.ts";
 
-export const SelectedServiceCard: FC<ISelectedServiceCardProps> = (service :
+export const SelectedServiceCard: FC<ISelectedServiceCardProps> = (service:
     ISelectedServiceCardProps) => {
-        return (
-            <div className="card mb-3 service-card-container">
+    const [rate, setRate] = useState<string>("BASE");
+
+    const handleChangeRate = (event: ChangeEventSelect) => {
+        setRate(event.target.value)
+        service.handleUpdateRate(service.id || 0, event.target.value)
+    };
+    
+    useEffect(() => {
+        setRate(service.rate)
+    }, [])
+    
+    const handleDeleteClick = () => {
+        api.selectedServices.selectedServicesDeleteDelete(service.bppID, service.id?.toString() || "")
+            .then(() => {
+                store.dispatch(
+                    addNotification({
+                        message: "Услуга удалена из проекта",
+                        isError: false,
+                    })
+                );
+                service.handleClickDelete(service?.id || 0)
+            }
+            )
+            .catch(() => {
+                store.dispatch(
+                    addNotification({
+                        message: "Ошибка удаления услуги из проекта",
+                        isError: true,
+                    })
+                );
+            }
+            )
+    };
+
+    return (
+        <div className="card mb-3 service-card-container">
             <div className="row g-0">
                 <div className="col-md-3">
                     <div className="card-body">
@@ -26,21 +64,41 @@ export const SelectedServiceCard: FC<ISelectedServiceCardProps> = (service :
                                 to={"/book_production_service/" + service.id}
                                 id={service.title}
                                 className="text-black text-decoration-none"
-                                state={{from: service.title}}
+                                state={{ from: service.title }}
                             >
                                 <strong>{service.title}</strong>
                             </Link>
                         </h2>
                         <p className="card-text h3">{service.price}</p>
                         {/* <p className="card-text">Тариф: <strong>{service.rate}</strong></p> */}
-                        <select className="rate-select" name="rate_info">
+                        {
+                            service.isEditable ?
+                                <select className="rate-select" name="rate_info" value={rate} onChange={handleChangeRate}>
                                     <option value="BASE" selected>Тариф "Базовый"</option>
                                     <option value="PROFESSIONAL">Тариф "Профессиональный"</option>
                                     <option value="PREMIUM">Тариф "Премиальный"</option>
-                        </select>
+                                </select>
+                            :
+                                <select className="rate-select" name="rate_info" value={rate} onChange={handleChangeRate} aria-readonly>
+                                    <option value="BASE">Тариф "Базовый"</option>
+                                    <option value="PROFESSIONAL">Тариф "Профессиональный"</option>
+                                    <option value="PREMIUM">Тариф "Премиальный"</option>
+                                </select>
+                        }
+                        {
+                        service.isEditable ?
+                            <button
+                                type="button"
+                                className="btn-close mt-1"
+                                aria-label="Close"
+                                onClick={handleDeleteClick}
+                            ></button>
+                            :
+                            <></>
+                    }
                     </div>
                 </div>
             </div>
         </div>
-        );
-    };
+    );
+};

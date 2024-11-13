@@ -1,32 +1,41 @@
 import "./BookPublishingProjectPage.css";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { Navbar } from "../../components/Navbar";
 import { Container } from "react-bootstrap";
-import { bookPublishingProject as PROJECT_MOCK } from "../../core/mock/bookPublishingProject.ts";
 import { SelectedServiceCard } from "../../components/SelectedServiceCard/index.tsx";
 import { ISelectedServiceCardProps } from "../../components/SelectedServiceCard/typing.tsx";
 import { Breadcrumbs } from "../../components/Breadcrumbs/index.tsx";
-import { api } from "../../core/api";
-import { FullBookPublishingProject, Related } from "../../core/api/Api.ts";
+import { useBookPublishingProjectPage } from "./useBookPublishingProjectPage.tsx";
+import { Related } from "../../core/api/Api.ts";
 
 export const BookPublishingProjectPage = () => {
-    const { id } = useParams();
-    const [bookPublishingProjectContentData, setBookPublishingProjectContentData] =
-        useState<FullBookPublishingProject>();
+    // const { id } = useParams();
+    // const [bookPublishingProjectContentData, setBookPublishingProjectContentData] =
+    //     useState<FullBookPublishingProject>();
 
-    useEffect(() => {
-        if (id) {
-            api.bookPublishingProject.bookPublishingProjectRead(id)
-                .then((data) => {
-                    setBookPublishingProjectContentData(data.data);
-                })
-                .catch(() => {
-                    setBookPublishingProjectContentData(PROJECT_MOCK)
-                });
-        }
-    }, [id]);
-
+    // useEffect(() => {
+    //     if (id) {
+    //         api.bookPublishingProject.bookPublishingProjectRead(id)
+    //             .then((data) => {
+    //                 setBookPublishingProjectContentData(data.data);
+    //             })
+    //             .catch(() => {
+    //                 setBookPublishingProjectContentData(PROJECT_MOCK)
+    //             });
+    //     }
+    // }, [id]);
+    const {
+        bookPublishingProjectContentData,
+        isEditable,
+        circulation,
+        // format,
+        id,
+        updRate: updRate,
+        handleClickDelete,
+        handleChangeCirculation: handleChangeCirculation,
+        // handleChangeFormat: handleChangeFormat,
+        handleClearClick,
+        handleFormClick,
+    } = useBookPublishingProjectPage()
 
     return (
         <>
@@ -65,9 +74,23 @@ export const BookPublishingProjectPage = () => {
                                 <p className="h3"><strong>Тираж:</strong></p>
                             </div>
                             <div className="col-9">
-                                <input type="text" className="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-default"
-                                    value={bookPublishingProjectContentData?.circulation?.toString()} readOnly />
+                                {
+                                    isEditable ?
+                                        <input
+                                            type="text"
+                                            className="input form-control"
+                                            aria-label="host"
+                                            value={circulation?.toString()}
+                                            onChange={handleChangeCirculation}
+                                        />
+                                        :
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            aria-label="circulation"
+                                            aria-describedby="inputGroup-sizing-default"
+                                            value={circulation?.toString()} readOnly />
+                                }
                             </div>
                         </div>
                     </div>
@@ -80,7 +103,11 @@ export const BookPublishingProjectPage = () => {
                                     title: service.service.title,
                                     price: service.service.price,
                                     imageUrl: service.service.image_url || undefined, // TODO: Что-то тут не так
-                                    rate: service.rate,
+                                    rate: service.rate || "BASE",
+                                    isEditable: isEditable,
+                                    bppID: id || "",
+                                    handleClickDelete: handleClickDelete,
+                                    handleUpdateRate: updRate,
                                 };
                                 return (
                                     <div className="col">
@@ -94,9 +121,26 @@ export const BookPublishingProjectPage = () => {
                             <h2>Проект Пустой</h2>
                         </Container>
                     )}
-                    <div className="d-flex justify-content-center">
-                        <button type="button" className="btn p-2 text-white bg-black"><strong>Оформить</strong></button>
-                    </div>
+                    {
+                        isEditable ?
+                            <div className="d-flex justify-content-center">
+                                <button
+                                    type="button"
+                                    className="btn p-2 text-white bg-black"
+                                    onClick={handleClearClick}>
+                                    <strong>Очистить</strong>
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn p-2 text-white bg-black"
+                                    onClick={handleFormClick}
+                                >
+                                    Оформить
+                                </button>
+                            </div>
+                            :
+                            <></>
+                    }
                 </div>
             </Container>
         </>

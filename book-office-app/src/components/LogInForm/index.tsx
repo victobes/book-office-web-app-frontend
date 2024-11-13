@@ -1,10 +1,11 @@
-import {FC, useState} from "react";
-import {ILoginFormProps, IUserLoginData} from "./typing.tsx";
-import {ChangeEvent} from "../../App.typing.tsx";
-import {api} from "../../core/api";
-import {useDispatch} from "../../core/store";
+import { FC, useState } from "react";
+import { ILoginFormProps, IUserLoginData } from "./typing.tsx";
+import { ChangeEvent } from "../../App.typing.tsx";
+import { api } from "../../core/api";
+import { store, useDispatch } from "../../core/store";
 import { saveUser } from "../../core/store/slices/userSlice.ts";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { addNotification } from "../../core/store/slices/appSlice.ts";
 
 export const LogInForm: FC<ILoginFormProps> = () => {
     const navigate = useNavigate();
@@ -13,25 +14,45 @@ export const LogInForm: FC<ILoginFormProps> = () => {
         password: "",
     });
     const handleChange = (event: ChangeEvent) => {
-        const {id, value} = event.target;
-        setLoginFormData((prevState) => ({...prevState, [id]: value}));
+        const { id, value } = event.target;
+        setLoginFormData((prevState) => ({ ...prevState, [id]: value }));
     }
     const dispatch = useDispatch();
     const clickLogIn = () => {
         if (loginFormData.username && loginFormData.password) {
             api.users.usersLogInCreate(loginFormData)
                 .then(() => {
-                    dispatch(saveUser({username: loginFormData.username, isAuth: true}))
-                    navigate('/'); // TODO: алерт успеха
+                    dispatch(saveUser({ username: loginFormData.username, isAuth: true }))
+                    store.dispatch(
+                        addNotification({
+                            message: "Добро пожаловать!",
+                            isError: false,
+                        })
+                    );
+                    navigate('/');
                 })
                 .catch((data) => {
-                    console.log("fail", data) // TODO: алерт
+                    if (data.status == 400) {
+                        store.dispatch(
+                            addNotification({
+                                message: "Неверный логин или пароль",
+                                isError: true,
+                            })
+                        );
+                    } else {
+                        store.dispatch(
+                            addNotification({
+                                message: "Ошибка сервера",
+                                isError: true,
+                            })
+                        );
+                    }
                 });
         }
     }
 
     return (
-        <div className="card border-black" style={{maxWidth: '350px'}}>
+        <div className="card border-black" style={{ maxWidth: '350px' }}>
             <div className="card-body">
                 <h5 className="card-title text-center mb-4"><strong>Вход</strong></h5>
                 <form>

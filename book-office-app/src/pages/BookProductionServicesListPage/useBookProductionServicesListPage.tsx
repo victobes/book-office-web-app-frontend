@@ -14,7 +14,7 @@ export const useBookProductionServicesListPage = () => {
     const [bookProductionServicesList, setBookProductionServicesList] = useState<BookProductionService[]>([]);
     const [bookPublishingProjectId, setBookPublishingProjectId] = useState<number>();
     const [selectedServicesCount, setSelectedServicesCount] = useState<number>(0);
-    
+
     const { searchBookProductionServiceTitle } = useSelector(selectApp);
     const dispatch = useDispatch();
 
@@ -39,7 +39,7 @@ export const useBookProductionServicesListPage = () => {
         api.bookProductionService.bookProductionServiceList({book_production_service_name: searchBookProductionServiceTitle})
             .then((data) => {
                 setBookProductionServicesList(data.data.book_production_services);
-                setBookPublishingProjectId(data.data.book_publishing_project_id || undefined)
+                setBookPublishingProjectId(data.data.book_publishing_project_id || 0)
                 setSelectedServicesCount(data.data?.selected_services_count || 0)
             })
             .catch(() => {

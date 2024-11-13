@@ -5,9 +5,10 @@ import Nav from "react-bootstrap/Nav";
 import NavbarComp from "react-bootstrap/Navbar";
 import { Link, NavLink } from "react-router-dom";
 import { selectUser } from "../../core/store/slices/selectors.ts";
-import { useDispatch, useSelector } from "../../core/store";
+import { store, useDispatch, useSelector } from "../../core/store";
 import { api } from "../../core/api";
 import { refreshUser } from "../../core/store/slices/userSlice.ts";
+import { addNotification } from "../../core/store/slices/appSlice.ts";
 
 export const Navbar: FC = () => {
     const { isAuth, username } = useSelector(selectUser);
@@ -17,6 +18,12 @@ export const Navbar: FC = () => {
         api.users.usersLogOutCreate()
             .then(() => console.log("logout"))
             .catch(err => console.log(err));
+        store.dispatch(
+            addNotification({
+                message: "Вы вышли из аккаунта",
+                isError: false,
+            })
+        );
         dispatch(refreshUser())
     }
 

@@ -3,13 +3,15 @@ import { ISignUpFormProps, IUserSignUpData } from "./typing.tsx";
 import { ChangeEvent } from "../../App.typing.tsx";
 import { api } from "../../core/api";
 import { useNavigate } from "react-router-dom";
+import {store} from "../../core/store";
+import {addNotification} from "../../core/store/slices/appSlice.ts";
 
 export const SignUpForm: FC<ISignUpFormProps> = () => {
     const navigate = useNavigate();
 
     const [loginFormData, setLoginFormData] = useState<IUserSignUpData>({
         username: "",
-        email: "",
+        // email: "",
         password: "",
     });
 
@@ -23,11 +25,30 @@ export const SignUpForm: FC<ISignUpFormProps> = () => {
             api.users.usersSignUpCreate(loginFormData)
                 .then((data) => {
                     console.log("success", data)
-                    // TODO: алерт успеха
+                    store.dispatch(
+                        addNotification({
+                            message: "Вы успешно зарегистрировались. Войдите",
+                            isError: false,
+                        })
+                    );
                     navigate('/login');
                 })
                 .catch((data) => {
-                    console.log("fail", data) // TODO: алерт фейла
+                    if (data.status == 400) {
+                        store.dispatch(
+                            addNotification({
+                                message: "Пользователь с указанным логином уже существует",
+                                isError: true,
+                            })
+                        );
+                    } else {
+                        store.dispatch(
+                            addNotification({
+                                message: "Ошибка сервера",
+                                isError: true,
+                            })
+                        );
+                    }
                 });
         }
     }
@@ -51,7 +72,7 @@ export const SignUpForm: FC<ISignUpFormProps> = () => {
                             required
                         />
                     </div>
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                         <label htmlFor="username" className="form-label">
                             E-mail
                         </label>
@@ -64,7 +85,7 @@ export const SignUpForm: FC<ISignUpFormProps> = () => {
                             onChange={handleChange}
                             required
                         />
-                    </div>
+                    </div> */}
                     <div className="mb-3">
                         <label htmlFor="password" className="form-label">
                             Пароль

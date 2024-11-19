@@ -17,7 +17,7 @@ export const Notification: React.FC<NotificationBarProps> = ({ notifyInfo, }) =>
     }, [dispatch, notifyInfo]);
     return (
         <>
-            <Alert variant={notifyInfo.isError ? "danger" : "success"} className="m-2 text-center">
+            <Alert variant={notifyInfo.isError ? "danger" : "success"} className="text-center notification">
                 {notifyInfo.message}
             </Alert>
         </>

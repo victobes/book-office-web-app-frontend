@@ -70,26 +70,30 @@ export const SelectedServiceCard: FC<ISelectedServiceCardProps> = (service:
                             </Link>
                         </h2>
                         <p className="card-text h3">{service.price}</p>
-                        {/* <p className="card-text">Тариф: <strong>{service.rate}</strong></p> */}
                         {
                             service.isEditable ?
-                                <select className="rate-select" name="rate_info" value={rate} onChange={handleChangeRate}>
+                                <select className="rate-select select-style" name="rate_info" value={rate} onChange={handleChangeRate}>
                                     <option value="BASE" selected>Тариф "Базовый"</option>
                                     <option value="PROFESSIONAL">Тариф "Профессиональный"</option>
                                     <option value="PREMIUM">Тариф "Премиальный"</option>
                                 </select>
                             :
-                                <select className="rate-select" name="rate_info" value={rate} onChange={handleChangeRate} aria-readonly>
-                                    <option value="BASE">Тариф "Базовый"</option>
-                                    <option value="PROFESSIONAL">Тариф "Профессиональный"</option>
-                                    <option value="PREMIUM">Тариф "Премиальный"</option>
-                                </select>
+                            <input type="text" className="form-control select-style rate-text" value={rate} readOnly/>
+                                // <select className="rate-select select-style" name="rate_info" value={rate} aria-readonly>
+                                //     <option value="BASE">Тариф "Базовый"</option>
+                                //     <option value="PROFESSIONAL">Тариф "Профессиональный"</option>
+                                //     <option value="PREMIUM">Тариф "Премиальный"</option>
+                                // </select>
                         }
-                        {
+                    </div >
+                </div>
+                <div className="col-md-3">
+                    <div className="d-flex justify-content-end p-3">
+                    {
                         service.isEditable ?
                             <button
                                 type="button"
-                                className="btn-close mt-1"
+                                className="btn-close"
                                 aria-label="Close"
                                 onClick={handleDeleteClick}
                             ></button>

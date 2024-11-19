@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../core/api";
 import { FullBookPublishingProject, Related } from "../../core/api/Api.ts";
 import { bookPublishingProject as BOOK_PUBLISHING_PROJECT_MOCK } from "../../core/mock/bookPublishingProject.ts";
-import { ChangeEvent } from "../../App.typing.tsx";
+import { ChangeEvent, ChangeEventSelect } from "../../App.typing.tsx";
 import { store } from "../../core/store";
 import { addNotification } from "../../core/store/slices/appSlice.ts";
 import axios from "axios";
@@ -26,12 +26,14 @@ export const useBookPublishingProjectPage = () => {
             return newRates;
         });
     }
+
     const updRate = (key: number, rate: string) => {
         setRates(prevRates => ({
             ...prevRates,
             [key]: rate,
         }));
     };
+
     const updPage = () => {
         if (id) {
             api.bookPublishingProject.bookPublishingProjectRead(id)
@@ -58,6 +60,10 @@ export const useBookPublishingProjectPage = () => {
         setCirculation(parseInt(e.target.value))
     };
 
+    const handleChangeFormat = (event: ChangeEventSelect) => {
+        setFormat(event.target.value)
+    }
+
     const handleClearClick = () => {
         api.bookPublishingProject.bookPublishingProjectDeleteDelete(id || "")
             .then(() => {
@@ -81,17 +87,16 @@ export const useBookPublishingProjectPage = () => {
     }
 
     const formBPP = async () => {
-        let failedVersion = false
+        let failedRate = false
         for (const [key, value] of Object.entries(rates)) {
             try {
-                //TODO: Добавить обработку тарифа
-                const putRateRespData = await api.selectedServices.selectedServicesPutUpdate(id || "", key.toString(), { rate: "BASE" })
+                const putRateRespData = await api.selectedServices.selectedServicesPutUpdate(id || "", key.toString(), { rate: value as "BASE" | "PREMIUM" | "PROFESSIONAL" })
                 console.log(putRateRespData)
                 console.log(value)
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                     if (error.response?.status == 400) {
-                        failedVersion = true
+                        failedRate = true
                     }
                 } else {
                     store.dispatch(
@@ -104,17 +109,20 @@ export const useBookPublishingProjectPage = () => {
                 }
             }
         }
-        if (failedVersion) {
+        if (failedRate) {
             store.dispatch(
                 addNotification({
-                    message: "Ошибка указания тарифов", // TODO: исправить!
+                    message: "Ошибка указания тарифов",
                     isError: true,
                 })
             );
             return
         }
         try {
-            const putRespData = await api.bookPublishingProject.bookPublishingProjectPutUpdate(id || "", { circulation: circulation }) // TODO: доделать для формата
+            const putRespData = await api.bookPublishingProject.bookPublishingProjectPutUpdate(id || "", {
+                circulation: circulation,
+                format: format as "A4" | "A5" | "A6" | "SQUARE" | "B5"
+            }) 
             console.log(putRespData)
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -174,7 +182,7 @@ export const useBookPublishingProjectPage = () => {
         updRate: updRate,
         handleClickDelete,
         handleChangeCirculation: handleChangeCirculation,
-        // handleChangeFormat: handleChangeFormat,
+        handleChangeFormat: handleChangeFormat,
         handleClearClick,
         handleFormClick,
     };

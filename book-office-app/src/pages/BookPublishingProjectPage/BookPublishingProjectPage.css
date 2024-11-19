@@ -14,6 +14,42 @@
     text-align: center;
 }
 
+.del-btn{
+    color: black;
+    border-color: black;
+    background-color: white;
+}
+
+.del-btn:hover{
+    background-color: #858dc7 !important;
+}
+
+.add-btn:hover{
+    background-color: #858dc7 !important;
+}
+
+.circulation-input{
+    border-color: black;
+    color: black;
+    font-size: large;
+    font-weight: 500;
+}
+
+.select-style{
+    background-color: white;
+    border-color: black;
+    border-radius: .25rem;
+    border-width: 1px;
+}
+
+
+
+
+
+
+
+
+
 body {
     background: #ffffff;
 }
@@ -379,7 +415,7 @@ body {
     margin-top: 10px;
 }
 
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
 }
 @media (max-width: 1200px) {
 }
@@ -388,4 +424,4 @@ body {
 @media (max-width: 768px) {
 }
 @media (max-width: 576px) {
-}
+} */

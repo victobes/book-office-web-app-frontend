@@ -27,12 +27,12 @@ export const BookPublishingProjectPage = () => {
         bookPublishingProjectContentData,
         isEditable,
         circulation,
-        // format,
+        format,
         id,
         updRate: updRate,
         handleClickDelete,
         handleChangeCirculation: handleChangeCirculation,
-        // handleChangeFormat: handleChangeFormat,
+        handleChangeFormat: handleChangeFormat,
         handleClearClick,
         handleFormClick,
     } = useBookPublishingProjectPage()
@@ -60,13 +60,23 @@ export const BookPublishingProjectPage = () => {
                                 <p className="h3"><strong>Формат:</strong></p>
                             </div>
                             <div className="col-9">
-                                <select className="format-select" name="format_info">
+                                {
+                                    isEditable?
+                                    <select className="format-select select-style" name="format_info" onChange={handleChangeFormat}>
                                     <option value="A4" selected>A4</option>
                                     <option value="A5">A5</option>
                                     <option value="A6">A6</option>
                                     <option value="B5">B5</option>
                                     <option value="SQUARE">Квадрат</option>
                                 </select>
+                                :
+                                <input
+                                            type="text"
+                                            className="form-control circulation-input"
+                                            aria-label="format"
+                                            aria-describedby="inputGroup-sizing-default"
+                                            value={format?.toString()} readOnly />
+                                }
                             </div>
                         </div>
                         <div className="row mb-3">
@@ -78,7 +88,7 @@ export const BookPublishingProjectPage = () => {
                                     isEditable ?
                                         <input
                                             type="text"
-                                            className="input form-control"
+                                            className="input form-control circulation-input"
                                             aria-label="host"
                                             value={circulation?.toString()}
                                             onChange={handleChangeCirculation}
@@ -86,7 +96,7 @@ export const BookPublishingProjectPage = () => {
                                         :
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className="form-control circulation-input"
                                             aria-label="circulation"
                                             aria-describedby="inputGroup-sizing-default"
                                             value={circulation?.toString()} readOnly />
@@ -118,24 +128,24 @@ export const BookPublishingProjectPage = () => {
                         </div>
                     ) : (
                         <Container className="d-flex justify-content-center mt-4 mb-5">
-                            <h2>Проект Пустой</h2>
+                            <h2>Проект пуст</h2>
                         </Container>
                     )}
                     {
                         isEditable ?
-                            <div className="d-flex justify-content-center">
+                            <div className="d-flex justify-content-end">
                                 <button
                                     type="button"
-                                    className="btn p-2 text-white bg-black"
+                                    className="btn p-2 del-btn me-2"
                                     onClick={handleClearClick}>
-                                    <strong>Очистить</strong>
+                                    Удалить проект
                                 </button>
                                 <button
                                     type="button"
-                                    className="btn p-2 text-white bg-black"
+                                    className="btn p-2 text-white bg-black add-btn"
                                     onClick={handleFormClick}
                                 >
-                                    Оформить
+                                    <strong>Оформить проект</strong>
                                 </button>
                             </div>
                             :

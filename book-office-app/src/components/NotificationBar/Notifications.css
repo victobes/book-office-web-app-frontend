@@ -1,5 +1,5 @@
 .notify-container {
-    max-width: 500px;
-    margin: auto;
     min-height: 36px;
+    margin-top: 60px;
+    align-content: center;
 }

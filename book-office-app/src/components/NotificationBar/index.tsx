@@ -10,7 +10,7 @@ export const NotificationBar: React.FC = () => {
   const firstNotification = notifications.length > 0 ? notifications[0] : null;
 
   return (
-    <div className="notify-container mt-1">
+    <div className="notify-container">
       {firstNotification ? (
         <Notification key={firstNotification.id} notifyInfo={firstNotification} />
       ) : (

@@ -22,7 +22,8 @@ export const BookProductionServicesListPage = () => {
     return (
         <>
             <Navbar />
-            <Container className="content-wrapper">
+            {/* <Container className="content-wrapper"> */}
+            <Container>
                 <Breadcrumbs
                     endItem="Услуги"
                 />

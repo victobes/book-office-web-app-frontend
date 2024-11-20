@@ -41,7 +41,8 @@ export const BookPublishingProjectPage = () => {
         <>
             <Navbar />
             <Container>
-                <div className="content-wrapper">
+                {/* <div className="content-wrapper"> */}
+                <div>
                     <Breadcrumbs
                         middleItems={[
                             {

@@ -30,6 +30,7 @@ export default defineConfig({
     ],
     base: "/book-office-web-app-frontend/",
     server: {
+        host: "0.0.0.0",
         port: 3000,
         proxy: {
             "/api": {

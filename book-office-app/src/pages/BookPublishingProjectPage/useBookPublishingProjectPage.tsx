@@ -187,3 +187,16 @@ export const useBookPublishingProjectPage = () => {
         handleFormClick,
     };
 }
+
+function mapRateToRussian(status?: string): string {
+    switch (status) {
+        case "BASE":
+            return 'Тариф "Базовый"';
+        case "PROFESSIONAL":
+            return 'Тариф "Профессиональный"';
+        case "PREMIUN":
+            return 'Тариф "Премиум"';
+        default:
+            return "Тариф не указан";
+    }
+}

@@ -78,7 +78,7 @@ export const SelectedServiceCard: FC<ISelectedServiceCardProps> = (service:
                                     <option value="PREMIUM">Тариф "Премиальный"</option>
                                 </select>
                             :
-                            <input type="text" className="form-control select-style rate-text" value={rate} readOnly/>
+                            <input type="text" className="form-control select-style rate-text" value={mapRateToRussian(rate)} readOnly/>
                                 // <select className="rate-select select-style" name="rate_info" value={rate} aria-readonly>
                                 //     <option value="BASE">Тариф "Базовый"</option>
                                 //     <option value="PROFESSIONAL">Тариф "Профессиональный"</option>
@@ -106,3 +106,16 @@ export const SelectedServiceCard: FC<ISelectedServiceCardProps> = (service:
         </div>
     );
 };
+
+function mapRateToRussian(status?: string): string {
+    switch (status) {
+        case "BASE":
+            return 'Тариф "Базовый"';
+        case "PROFESSIONAL":
+            return 'Тариф "Профессиональный"';
+        case "PREMIUN":
+            return 'Тариф "Премиум"';
+        default:
+            return 'Тариф "Базовый"';
+    }
+}

@@ -113,12 +113,12 @@ export function mapBackendResultToTableData(requests: BookPublishingProject[]): 
 }
 
 export function filterDataOnFront(
-    installSoftwareRequestsList: BookPublishingProject[],
+    bookPublishingProjectsList: BookPublishingProject[],
     filterStatus?: string,
     filterStartDate?: string,
     filterEndDate?: string
 ): BookPublishingProject[] {
-    return installSoftwareRequestsList.filter((row) => {
+    return bookPublishingProjectsList.filter((row) => {
         let matchesStatus = true;
         let matchesStartDate = true;
         let matchesEndDate = true;

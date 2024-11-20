@@ -9,7 +9,6 @@ import { store, useDispatch, useSelector } from "../../core/store";
 import { api } from "../../core/api";
 import { refreshUser } from "../../core/store/slices/userSlice.ts";
 import { addNotification } from "../../core/store/slices/appSlice.ts";
-import {USER_NAME} from "../../env.tsx";
 
 export const Navbar: FC = () => {
     const { isAuth, username } = useSelector(selectUser);
@@ -20,7 +19,6 @@ export const Navbar: FC = () => {
         api.users.usersLogOutCreate()
             .then(() => console.log("logout"))
             .catch(err => console.log(err));
-        localStorage.removeItem(USER_NAME)
         store.dispatch(
             addNotification({
                 message: "Вы вышли из аккаунта",

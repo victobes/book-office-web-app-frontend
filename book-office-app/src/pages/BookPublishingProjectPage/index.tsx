@@ -89,8 +89,8 @@ export const BookPublishingProjectPage = () => {
                                         <input
                                             type="text"
                                             className="input form-control circulation-input"
-                                            aria-label="host"
-                                            value={circulation?.toString()}
+                                            aria-label="circulation"
+                                            value={circulation ? circulation.toString() : '0'}
                                             onChange={handleChangeCirculation}
                                         />
                                         :

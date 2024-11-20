@@ -25,6 +25,7 @@ export const useBookPublishingProjectPage = () => {
             delete newRates[key];
             return newRates;
         });
+        updPage()
     }
 
     const updRate = (key: number, rate: string) => {
@@ -138,7 +139,7 @@ export const useBookPublishingProjectPage = () => {
             } else {
                 store.dispatch(
                     addNotification({
-                        message: "Ошибка оформления заявки",
+                        message: "Ошибка оформления проекта",
                         isError: true,
                     })
                 );
@@ -186,17 +187,4 @@ export const useBookPublishingProjectPage = () => {
         handleClearClick,
         handleFormClick,
     };
-}
-
-function mapRateToRussian(status?: string): string {
-    switch (status) {
-        case "BASE":
-            return 'Тариф "Базовый"';
-        case "PROFESSIONAL":
-            return 'Тариф "Профессиональный"';
-        case "PREMIUN":
-            return 'Тариф "Премиум"';
-        default:
-            return "Тариф не указан";
-    }
 }

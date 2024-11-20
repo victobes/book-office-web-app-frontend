@@ -1,0 +1,17 @@
+.row-with-separators {
+    display: flex;
+}
+
+.row-with-separators > div {
+    position: relative;
+}
+
+.row-with-separators > div:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 1px; /* Ширина разделителя */
+    background-color: black; /* Цвет разделителя */
+}

@@ -1,3 +1,4 @@
+import "../../components/BPPFilters/BPPFilters.css"
 import { FC } from "react";
 import { IBPPFiltersProps } from "./typing.tsx";
 import { Button, Card, Form } from "react-bootstrap";
@@ -40,7 +41,7 @@ export const BPPFilters: FC<IBPPFiltersProps> = (props: IBPPFiltersProps) => {
                         </div>
                         <Button
                             onClick={props.handleFilterBPPClick}
-                            className="btn dark-blue-btn"
+                            className="btn black-btn"
                         > <strong>Показать</strong>
                         </Button>
                     </div>

@@ -9,6 +9,8 @@ import { UserAccountPage } from "./pages/UserAccountPage";
 import { BookPublishingProjectsListPage } from "./pages/BookPublishingProjectsListPage";
 import { MainLayout } from "./components/MainLayout";
 import { PrivatePageFirewall } from "./components/PrivatePageFirewall";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { ForbiddenPage } from "./pages/ForbiddenPage";
 
 export const AppRoutes = () => {
     const routes: RouteObject[] = [
@@ -30,28 +32,36 @@ export const AppRoutes = () => {
                 },
                 {
                     path: "/",
-                    element: <MainPage/>,
+                    element: <MainPage />,
                 },
                 {
                     path: "/book_production_services_list",
-                    element: <BookProductionServicesListPage/>
+                    element: <BookProductionServicesListPage />
                 },
                 {
                     path: "/book_production_service/:id",
-                    element: <BookProductionServicePage/>
+                    element: <BookProductionServicePage />
                 },
 
                 {
                     path: "/sign_up",
-                    element: <SignUpPage/>,
+                    element: <SignUpPage />,
                 },
                 {
                     path: "/log_in",
-                    element: <LogInPage/>,
+                    element: <LogInPage />,
                 },
                 {
                     path: "/user_account",
-                    element: <UserAccountPage/>,
+                    element: <UserAccountPage />,
+                },
+                {
+                    path: "/forbidden",
+                    element: <ForbiddenPage />,
+                },
+                {
+                    path: "*",
+                    element: <NotFoundPage />,
                 },
             ],
         },

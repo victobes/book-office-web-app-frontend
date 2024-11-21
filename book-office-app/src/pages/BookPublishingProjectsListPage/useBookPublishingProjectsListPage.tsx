@@ -53,6 +53,12 @@ export const useBookPublishingProjectsListPage = () => {
             })
     };
 
+    // Short Polling
+    useEffect(() => {
+        let id = setTimeout(handleFilterBPPClick, 2000);
+        return () => clearTimeout(id);
+    });
+
     useEffect(handleFilterBPPClick, []);
 
     const filtersProps: IBPPFiltersProps = {

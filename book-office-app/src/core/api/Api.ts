@@ -237,6 +237,14 @@ export interface SelectedServices {
   rate?: "BASE" | "PREMIUM" | "PROFESSIONAL";
 }
 
+export interface UserLogin {
+  /**
+   * Staff status
+   * Designates whether the user can log into this admin site.
+   */
+  is_staff?: boolean;
+}
+
 export interface User {
   /** ID */
   id?: number;
@@ -500,12 +508,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/book_production_service/{id}/add_image
      * @secure
      */
-    bookProductionServiceAddImageCreate: (id: string, data: File, params: RequestParams = {}) =>
+    bookProductionServiceAddImageCreate: (
+      id: string,
+      data: {
+        /**
+         * Изображение для загрузки
+         * @format binary
+         */
+        image: File;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<void, void>({
         path: `/book_production_service/${id}/add_image`,
         method: "POST",
         body: data,
         secure: true,
+        type: ContentType.FormData,
         ...params,
       }),
 
@@ -655,11 +674,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/book_publishing_project/{id}/resolve
      * @secure
      */
-    bookPublishingProjectResolveUpdate: (id: string, params: RequestParams = {}) =>
+    bookPublishingProjectResolveUpdate: (id: string, data: ResolveBookPublishingProject, params: RequestParams = {}) =>
       this.request<ResolveBookPublishingProject, void>({
         path: `/book_publishing_project/${id}/resolve`,
         method: "PUT",
+        body: data,
         secure: true,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
@@ -723,12 +744,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       },
       params: RequestParams = {},
     ) =>
-      this.request<void, void>({
+      this.request<UserLogin, void>({
         path: `/users/log_in`,
         method: "POST",
         body: data,
         secure: true,
         type: ContentType.UrlEncoded,
+        format: "json",
         ...params,
       }),
 

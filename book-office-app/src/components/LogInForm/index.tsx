@@ -21,8 +21,12 @@ export const LogInForm: FC<ILoginFormProps> = () => {
     const clickLogIn = () => {
         if (loginFormData.username && loginFormData.password) {
             api.users.usersLogInCreate(loginFormData)
-                .then(() => {
-                    dispatch(saveUser({ username: loginFormData.username, isAuth: true }))
+                .then((data) => {
+                    dispatch(saveUser({ 
+                        username: loginFormData.username, 
+                        isAuth: true,
+                        isManager: data.data.is_staff || false, 
+                    }))
                     store.dispatch(
                         addNotification({
                             message: "Добро пожаловать!",

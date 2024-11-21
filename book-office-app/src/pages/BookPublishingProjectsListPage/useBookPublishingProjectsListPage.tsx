@@ -3,28 +3,38 @@ import { IBPPFiltersProps } from "../../components/BPPFilters/typing.tsx";
 import { IBPPTableProps, IBPPTableRow } from "../../components/BPPTable/typing.tsx";
 import { api } from "../../core/api/index.ts";
 import { BookPublishingProject } from "../../core/api/Api.ts";
+
 import { bookPublishingProjectsList as BOOK_PUBLISHING_PROJECTS_LIST_MOCK } from "../../core/mock/bookPublishingProjectsList.ts";
 
 import { useDispatch, useSelector } from "../../core/store/index.ts";
 import { selectApp } from "../../core/store/slices/selectors.ts";
 import {
+    saveFilterISRAuthor,
     saveFilterBPPStatus,
     saveFilterBPPStartDate,
     saveFilterBPPEndDate
 } from "../../core/store/slices/appSlice.ts";
 
 export const useBookPublishingProjectsListPage = () => {
-    const [tableProps, setTableProps] = useState<IBPPTableProps>({ rows: [] });
+    const [tableProps, setTableProps] = useState<IBPPTableProps>({ 
+        rows: [], updateListPageFunc: () => {
+    } });
 
-    const { filterBPPStatus, filterBPPStartDate, filterBPPEndDate } = useSelector(selectApp);
+    const { filterISRAuthor, filterBPPStatus, filterBPPStartDate, filterBPPEndDate } = useSelector(selectApp);
     const dispatch = useDispatch();
 
     const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         dispatch(saveFilterBPPStatus(event.target.value))
     };
+
+    const handleAuthorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(saveFilterISRAuthor(event.target.value))
+    };
+
     const handleStartDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(saveFilterBPPStartDate(event.target.value))
     };
+    
     const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(saveFilterBPPEndDate(event.target.value))
     };
@@ -39,16 +49,30 @@ export const useBookPublishingProjectsListPage = () => {
                 formation_end: mapStringToOptQueryParam(filterBPPEndDate),
             })
             .then((data) => {
-                setTableProps(mapBackendResultToTableData(data.data))
+                // setTableProps(mapBackendResultToTableData(data.data))
+                setTableProps(
+                    {
+                        rows: filterAndConvertData(data.data, filterISRAuthor),
+                        updateListPageFunc: handleFilterBPPClick,
+                    })
             })
             .catch(() => {
                 setTableProps(
-                    mapBackendResultToTableData(
-                        filterDataOnFront(BOOK_PUBLISHING_PROJECTS_LIST_MOCK,
-                            mapStringToOptQueryParam(filterBPPStatus),
-                            mapStringToOptQueryParam(filterBPPStartDate),
-                            mapStringToOptQueryParam(filterBPPEndDate))
-                    )
+                    // mapBackendResultToTableData(
+                    //     filterDataOnFront(BOOK_PUBLISHING_PROJECTS_LIST_MOCK,
+                    //         mapStringToOptQueryParam(filterBPPStatus),
+                    //         mapStringToOptQueryParam(filterBPPStartDate),
+                    //         mapStringToOptQueryParam(filterBPPEndDate))
+                    // )
+                    {
+                        rows: filterAndConvertData(
+                            filterDataOnFront(BOOK_PUBLISHING_PROJECTS_LIST_MOCK,
+                                mapStringToOptQueryParam(filterBPPStatus),
+                                mapStringToOptQueryParam(filterBPPStartDate),
+                                mapStringToOptQueryParam(filterBPPEndDate),
+                            ), filterISRAuthor),
+                        updateListPageFunc: handleFilterBPPClick,
+                    }
                 );
             })
     };
@@ -65,7 +89,8 @@ export const useBookPublishingProjectsListPage = () => {
         selectedStatus: filterBPPStatus,
         selectedStartDate: filterBPPStartDate,
         selectedEndDate: filterBPPEndDate,
-
+        selectedAuthor: filterISRAuthor,
+        handleAuthorChange: handleAuthorChange,
         handleStatusChange: handleStatusChange,
         handleStartDateChange: handleStartDateChange,
         handleEndDateChange: handleEndDateChange,
@@ -89,11 +114,11 @@ function mapStatusToTable(status?: string): string {
         case "FORMED":
             return "В работе";
         case "COMPLETED":
-            return "Завершена";
+            return "Завершен";
         case "REJECTED":
-            return "Отклонена";
+            return "Отклонен";
         default:
-            return "Неизвестный";
+            return "Неизвестен";
     }
 }
 function convertDatetimeToDDMMYYYY(dateString: string | null | undefined): string {
@@ -104,10 +129,18 @@ function convertDatetimeToDDMMYYYY(dateString: string | null | undefined): strin
     const year = date.getFullYear();
     return `${day}.${month}.${year}`;
 }
-export function mapBackendResultToTableData(requests: BookPublishingProject[]): IBPPTableProps {
-    const rows: IBPPTableRow[] = requests.map((request) => {
+// export function mapBackendResultToTableData(requests: BookPublishingProject[]): IBPPTableProps {
+//     const rows: IBPPTableRow[] = requests.map((request) => {
+    export function filterAndConvertData(requests: BookPublishingProject[], 
+        customerFilter: string | undefined): IBPPTableRow[] {
+        const filteredRequests = customerFilter
+            ? requests.filter((request) => request.customer === customerFilter)
+            : requests;
+
+        return filteredRequests.map((request) => {
         return {
             number: request.pk || 0,
+            customer: request.customer || "",
             status: mapStatusToTable(request.status),
             creationDate: convertDatetimeToDDMMYYYY(request.creation_datetime),
             registrationDate: convertDatetimeToDDMMYYYY(request.formation_datetime),
@@ -115,7 +148,7 @@ export function mapBackendResultToTableData(requests: BookPublishingProject[]): 
         };
     });
 
-    return {rows};
+    // return {rows};
 }
 
 export function filterDataOnFront(

@@ -9,6 +9,7 @@ export interface INotification {
 
 export interface IAppData {
     searchBookProductionServiceTitle: string;
+    filterISRAuthor?: string;
     filterBPPStatus?: string;
     filterBPPStartDate?: string;
     filterBPPEndDate?: string;
@@ -18,6 +19,7 @@ export interface IAppData {
 
 const initialState: IAppData = {
     searchBookProductionServiceTitle: "",
+    filterISRAuthor: undefined,
     filterBPPStatus: undefined,
     filterBPPStartDate: undefined,
     filterBPPEndDate: undefined,
@@ -36,6 +38,9 @@ export const appSlice = createSlice({
         },
         saveBookProductionServiceTitle: (state, action: PayloadAction<string>) => {
             state.searchBookProductionServiceTitle = action.payload;
+        },
+        saveFilterISRAuthor: (state, action: PayloadAction<string>) => {
+            state.filterISRAuthor = action.payload;
         },
         saveFilterBPPStatus: (state, action: PayloadAction<string>) => {
             state.filterBPPStatus = action.payload;
@@ -67,6 +72,7 @@ export const appSlice = createSlice({
 export const {
     refreshApp,
     saveBookProductionServiceTitle,
+    saveFilterISRAuthor,
     saveFilterBPPStatus,
     saveFilterBPPStartDate,
     saveFilterBPPEndDate,

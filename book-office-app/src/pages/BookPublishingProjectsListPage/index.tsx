@@ -12,7 +12,7 @@ export const BookPublishingProjectsListPage = () => {
         <>
             <Navbar />
             <Container>
-                <h1 className="m-3 header-style"><strong>Мои проекты</strong></h1>
+                <h1 className="m-3 header-style"><strong>Проекты</strong></h1>
                 <BPPFilters {...filtersProps}></BPPFilters>
                 <div className="m-3">
                     <BPPTable {...tableProps}></BPPTable>

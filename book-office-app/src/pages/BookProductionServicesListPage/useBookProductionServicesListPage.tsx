@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { selectApp } from "../../core/store/slices/selectors.ts";
+import { selectApp, selectUser} from "../../core/store/slices/selectors.ts";
 import { useSelector, useDispatch } from "../../core/store/index.ts";
 
 import { bookProductionServicesList as SERVICES_LIST_MOCK } from "../../core/mock/bookProductionServicesList.ts";
@@ -17,6 +17,7 @@ export const useBookProductionServicesListPage = () => {
 
     const [isPageActive, setIsPageActive] = useState(false);
     const { searchBookProductionServiceTitle } = useSelector(selectApp);
+    const {isManager} = useSelector(selectUser);
     const dispatch = useDispatch();
 
     const handleSearchServiceClick = () => {
@@ -57,6 +58,7 @@ export const useBookProductionServicesListPage = () => {
         searchBookProductionServiceTitle,
         selectedServicesCount,
         isPageActive,
+        isManager,
         updateBPSListPageFunc: handleSearchServiceClick,
         handleSearchServiceClick,
         handleSearchServiceTitleChange,

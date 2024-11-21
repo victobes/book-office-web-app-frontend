@@ -11,6 +11,8 @@ import { MainLayout } from "./components/MainLayout";
 import { PrivatePageFirewall } from "./components/PrivatePageFirewall";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ForbiddenPage } from "./pages/ForbiddenPage";
+import { ServiceEditPage } from "./pages/ServiceEditPage";
+import { ManagerPageFirewall } from "./components/ManagerPageFirewall";
 
 export const AppRoutes = () => {
     const routes: RouteObject[] = [
@@ -28,6 +30,15 @@ export const AppRoutes = () => {
                             path: "/book_publishing_projects_list",
                             element: <BookPublishingProjectsListPage />,
                         },
+                        {
+                            element: <ManagerPageFirewall/>,
+                            children: [
+                                {
+                                    path: "/edit_service/:id",
+                                    element: <ServiceEditPage/>,
+                                },
+                            ],
+                        }
                     ],
                 },
                 {

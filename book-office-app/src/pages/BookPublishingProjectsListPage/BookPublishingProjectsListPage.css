@@ -1,3 +1,15 @@
 .header-style{
     text-align: center;
 }
+
+.black-btn:disabled{
+    background-color: #858dc7;
+    border-color: #858dc7 ;
+    color: white; 
+}
+
+.outlined-btn:disabled{
+    background-color: white;
+    border-color: #858dc7 ;
+    color: #858dc7; 
+}

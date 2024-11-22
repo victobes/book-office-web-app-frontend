@@ -9,6 +9,7 @@ export interface INotification {
 
 export interface IAppData {
     searchBookProductionServiceTitle: string;
+    searchInListBookProductionServiceTitle: string;
     filterISRAuthor?: string;
     filterBPPStatus?: string;
     filterBPPStartDate?: string;
@@ -19,6 +20,7 @@ export interface IAppData {
 
 const initialState: IAppData = {
     searchBookProductionServiceTitle: "",
+    searchInListBookProductionServiceTitle: "",
     filterISRAuthor: undefined,
     filterBPPStatus: undefined,
     filterBPPStartDate: undefined,
@@ -32,12 +34,16 @@ export const appSlice = createSlice({
     reducers: {
         refreshApp: (state) => {
             state.searchBookProductionServiceTitle = "";
+            // state.searchInListBookProductionServiceTitle = "";
             state.filterBPPStatus = undefined;
             state.filterBPPStartDate = undefined;
             state.filterBPPEndDate = undefined;
         },
         saveBookProductionServiceTitle: (state, action: PayloadAction<string>) => {
             state.searchBookProductionServiceTitle = action.payload;
+        },
+        saveSearchInListBookProductionServiceTitle: (state, action: PayloadAction<string>) => {
+            state.searchInListBookProductionServiceTitle = action.payload;
         },
         saveFilterISRAuthor: (state, action: PayloadAction<string>) => {
             state.filterISRAuthor = action.payload;
@@ -72,6 +78,7 @@ export const appSlice = createSlice({
 export const {
     refreshApp,
     saveBookProductionServiceTitle,
+    saveSearchInListBookProductionServiceTitle,
     saveFilterISRAuthor,
     saveFilterBPPStatus,
     saveFilterBPPStartDate,

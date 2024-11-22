@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { IBookProductionServiceListCardProps } from "../../components/BookProductionServiceListCard/typing";
 import { LoadingAnimation } from "../../components/LoadingAnimation";
-import { ServiceManagerCard } from "../../components/ServiceManagerCard";
-import { IServiceManagerCardProps } from "../../components/ServiceManagerCard/typing";
 
 export const BookProductionServicesListPage = () => {
     const {
@@ -17,7 +15,6 @@ export const BookProductionServicesListPage = () => {
         selectedServicesCount,
         searchBookProductionServiceTitle,
         isPageActive,
-        isManager,
         updateBPSListPageFunc,
         handleSearchServiceClick,
         handleSearchServiceTitleChange,
@@ -26,7 +23,6 @@ export const BookProductionServicesListPage = () => {
     return (
         <>
             <Navbar />
-            {/* <Container className="content-wrapper"> */}
             <Container>
                 <Breadcrumbs
                     endItem="Услуги"
@@ -74,40 +70,24 @@ export const BookProductionServicesListPage = () => {
                     isPageActive ?
                         <>
                             {bookProductionServicesList && !!bookProductionServicesList.length ? (
-                                isManager ?
-                                    <div>
-                                        {bookProductionServicesList.map((service, index) => {
-                                            const props: IServiceManagerCardProps = {
-                                                id: service.pk || 0,
-                                                title: service.title,
-                                                price: service.price,
-                                                imageUrl: service.image_url || "",
-                                                updateBPSListPageFunc: updateBPSListPageFunc,
-                                            };
-                                            return (
-                                                <ServiceManagerCard key={index} {...props} />
-                                            );
-                                        })}
-                                    </div>
-                                    :
-                                    <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                                        {bookProductionServicesList.map((service, index) => {
-                                            const props: IBookProductionServiceListCardProps = {
-                                                id: service.pk || 0,
-                                                title: service.title,
-                                                price: service.price,
-                                                imageUrl: service.image_url || "",
-                                                updateBPSListPageFunc: updateBPSListPageFunc,
-                                            };
+                                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                                    {bookProductionServicesList.map((service, index) => {
+                                        const props: IBookProductionServiceListCardProps = {
+                                            id: service.pk || 0,
+                                            title: service.title,
+                                            price: service.price,
+                                            imageUrl: service.image_url || "",
+                                            updateBPSListPageFunc: updateBPSListPageFunc,
+                                        };
 
-                                            return (
-                                                <div className="col">
-                                                    <BookProductionServiceListCard key={index}{...props} />
-                                                </div>
+                                        return (
+                                            <div className="col">
+                                                <BookProductionServiceListCard key={index}{...props} />
+                                            </div>
 
-                                            )
-                                        })}
-                                    </div>
+                                        )
+                                    })}
+                                </div>
                             ) : (
                                 <Container className="d-flex justify-content-center mt-4 mb-5">
                                     <h2>Ничего не найдено</h2>
@@ -118,21 +98,8 @@ export const BookProductionServicesListPage = () => {
                         <>
                             <LoadingAnimation></LoadingAnimation>
                         </>
-                        
+
                 }
-                 {
-                isManager ?
-                    <div className="d-flex justify-content-end">
-                        <Link
-                            to={"/edit_service"}
-                            className="btn black-btn"
-                        >
-                            Добавить услугу
-                        </Link>
-                    </div>
-                    :
-                    <></>
-            }
             </Container>
         </>
     );

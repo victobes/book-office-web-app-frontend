@@ -13,6 +13,7 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 import { ForbiddenPage } from "./pages/ForbiddenPage";
 import { ServiceEditPage } from "./pages/ServiceEditPage";
 import { ManagerPageFirewall } from "./components/ManagerPageFirewall";
+import { BookProductionServicesEditableListPage } from "./pages/BookProductionServicesEditableListPage";
 
 export const AppRoutes = () => {
     const routes: RouteObject[] = [
@@ -36,6 +37,10 @@ export const AppRoutes = () => {
                                 {
                                     path: "/edit_service/:id",
                                     element: <ServiceEditPage/>,
+                                },
+                                {
+                                    path: "/services_list",
+                                    element: <BookProductionServicesEditableListPage/>,
                                 },
                             ],
                         }

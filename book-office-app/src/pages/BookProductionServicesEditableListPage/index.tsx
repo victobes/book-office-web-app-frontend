@@ -84,7 +84,7 @@ export const BookProductionServicesEditableListPage = () => {
                             to={"/add_service/"}
                             className="btn black-btn"
                         >
-                            Добавить услугу
+                            <strong>Добавить услугу</strong>
                         </Link>
                     </div>
             </Container>

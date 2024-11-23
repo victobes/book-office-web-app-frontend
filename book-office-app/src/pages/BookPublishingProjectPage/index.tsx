@@ -62,16 +62,16 @@ export const BookPublishingProjectPage = () => {
                             </div>
                             <div className="col-9">
                                 {
-                                    isEditable?
-                                    <select className="format-select select-style" name="format_info" onChange={handleChangeFormat}>
-                                    <option value="A4" selected>A4</option>
-                                    <option value="A5">A5</option>
-                                    <option value="A6">A6</option>
-                                    <option value="B5">B5</option>
-                                    <option value="SQUARE">Квадрат</option>
-                                </select>
-                                :
-                                <input
+                                    isEditable ?
+                                        <select className="format-select select-style" name="format_info" onChange={handleChangeFormat}>
+                                            <option value="A4" selected>A4</option>
+                                            <option value="A5">A5</option>
+                                            <option value="A6">A6</option>
+                                            <option value="B5">B5</option>
+                                            <option value="SQUARE">Квадрат</option>
+                                        </select>
+                                        :
+                                        <input
                                             type="text"
                                             className="form-control circulation-input"
                                             aria-label="format"
@@ -104,6 +104,16 @@ export const BookPublishingProjectPage = () => {
                                 }
                             </div>
                         </div>
+                        {bookPublishingProjectContentData?.personal_discount != null ?
+                            (<div className="row mb-3">
+                                <div className="col">
+                                    <p className="h3"><strong>Персональная скидка: {bookPublishingProjectContentData?.personal_discount} %</strong></p>
+                                </div>
+                            </div>) : (
+                                <>
+                                </>
+                            )
+                        }
                     </div>
 
                     {bookPublishingProjectContentData?.services_list && !!bookPublishingProjectContentData.services_list.length ? (

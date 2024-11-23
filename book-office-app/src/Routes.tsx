@@ -39,6 +39,10 @@ export const AppRoutes = () => {
                                     element: <ServiceEditPage/>,
                                 },
                                 {
+                                    path: "/add_service",
+                                    element: <ServiceEditPage/>,
+                                },
+                                {
                                     path: "/services_list",
                                     element: <BookProductionServicesEditableListPage/>,
                                 },

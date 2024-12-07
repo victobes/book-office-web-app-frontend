@@ -6,7 +6,7 @@ import { store } from "./core/store";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<BrowserRouter basename="/book-office-web-app-frontend">
+ReactDOM.createRoot(document.getElementById('root')!).render(<BrowserRouter basename="">
     <Provider store={store}>
         <App />
     </Provider>
